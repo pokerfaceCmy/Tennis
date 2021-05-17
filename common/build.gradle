@@ -1,0 +1,102 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+dependencies {
+    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    api "androidx.core:core-ktx:$ktx_version"
+    api "androidx.appcompat:appcompat:$appcompat_version"
+    api "com.google.android.material:material:$material_version"
+
+    api "com.squareup.okhttp3:okhttp:${okhttp_version}"
+    api "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.retrofit2:converter-gson:$retrofit_converter_version"
+
+    api "com.google.code.gson:gson:$gson_version"
+    //协程
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3'
+    //livedata
+    api "androidx.lifecycle:lifecycle-livedata-ktx:$livedata_version"
+    api "androidx.lifecycle:lifecycle-livedata-core-ktx:$livedata_version"
+    //viewmodel
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewmodel_version"
+    api "androidx.lifecycle:lifecycle-runtime-ktx:$viewmodel_version"
+    //lottie 动画库
+    api "com.airbnb.android:lottie:$lottie_version"
+    //xpopup 弹窗
+    api "com.lxj:xpopup:$xpopup_version"
+    //三级联动
+    api "com.lxj:xpopup-ext:0.0.4"
+    //log
+    api "com.jakewharton.timber:timber:$timber_version"
+    api "com.orhanobut:logger:$logger_version"
+    //屏幕适配
+    api "me.jessyan:autosize:1.2.1"
+    //图片加载
+    api 'io.coil-kt:coil:1.2.1'
+    //adapter
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+    //状态栏
+    api 'com.github.Ye-Miao:StatusBarUtil:1.7.5'
+    //工具类
+    api 'com.blankj:utilcodex:1.30.6'
+    //数据存储
+    // optional - Kotlin Extensions and Coroutines support for Room
+    api "androidx.room:room-ktx:$room_version"
+    api "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+//    //hilt
+//    implementation "com.google.dagger:hilt-android:${hilt_version}"
+//    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
+//    kapt "com.google.dagger:hilt-android-compiler:${hilt_version}"
+//    kapt 'androidx.hilt:hilt-compiler:1.0.0'
+
+    //阿里路由框架
+    implementation 'com.alibaba:arouter-api:1.5.1'
+    kapt 'com.alibaba:arouter-compiler:1.5.1'
+}

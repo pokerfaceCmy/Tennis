@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "8664796276",
+    "project_id": "tennis-c3234",
+    "storage_bucket": "tennis-c3234.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:8664796276:android:ae76c8a1d2957b9fad1521",
+        "android_client_info": {
+          "package_name": "com.wetech.aus.tennis.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "8664796276-55ei4rb4harj67shvubfi8ot8ovmki0j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBa1_v1CZkxLlxZnoPaZ97iVWw6bpGu__U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "8664796276-55ei4rb4harj67shvubfi8ot8ovmki0j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
