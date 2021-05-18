@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_home"
+        android:checked="true"
+        android:icon="@drawable/selector_bottom_nav_home"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/menu_courts"
+        android:icon="@drawable/selector_bottom_nav_courts"
+        android:title="@string/courts" />
+    <!--因为需要覆盖view 此处省略android:icon-->
+    <item
+        android:id="@+id/menu_empty"
+        android:title="" />
+
+    <item
+        android:id="@+id/menu_booking"
+        android:checked="true"
+        android:icon="@drawable/selector_bottom_nav_booking"
+        android:title="@string/my_booking" />
+
+    <item
+        android:id="@+id/menu_Profile"
+        android:icon="@drawable/selector_bottom_nav_profile"
+        android:title="@string/profile" />
+</menu>
