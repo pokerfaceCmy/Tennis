@@ -32,8 +32,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     R.id.menu_empty -> {
                         scanQRCode()
                     }
-                    R.id.menu_booking -> viewPage.setCurrentItem(3, true)
-                    R.id.menu_Profile -> viewPage.setCurrentItem(4, true)
+                    R.id.menu_booking -> viewPage.setCurrentItem(2, true)
+                    R.id.menu_Profile -> viewPage.setCurrentItem(3, true)
                 }
                 true
             }
