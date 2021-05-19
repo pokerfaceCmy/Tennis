@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:background="?android:attr/windowBackground"
+        app:itemIconTint="@color/bnav_setting_btn_text_selector"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,7 +20,7 @@
 
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/appCompatImageView"
+        android:id="@+id/imgScan"
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:layout_marginBottom="5.5dp"

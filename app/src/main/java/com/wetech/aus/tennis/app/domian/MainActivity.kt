@@ -1,16 +1,19 @@
 package com.wetech.aus.tennis.app.domian
 
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.pcyun.common.base.BaseActivity
 import com.wetech.aus.tennis.app.R
 import com.wetech.aus.tennis.app.databinding.ActivityMainBinding
 import com.wetech.aus.tennis.app.domian.booking.BookingFragment
 import com.wetech.aus.tennis.app.domian.courts.CourtsFragment
+import com.wetech.aus.tennis.app.domian.courts.ui.MapsFragment.Companion.MAP_FRAGMENT_RESUME
 import com.wetech.aus.tennis.app.domian.home.HomeFragment
 import com.wetech.aus.tennis.app.domian.profile.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun init() {
         binding.apply {
+
             viewPage.adapter = ViewPager2Adapter(supportFragmentManager, lifecycle)
             viewPage.offscreenPageLimit = 4
             (viewPage.getChildAt(0) as RecyclerView).overScrollMode =
@@ -48,6 +52,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     bottomNav.menu.getItem(mPosition).isChecked = true
                 }
             })
+            viewPage.isUserInputEnabled = false
+            //如果是地图页面的话,隐藏底部导航栏
+            LiveEventBus.get(MAP_FRAGMENT_RESUME, Int::class.java)
+                .observe(mLifecycleOwner, {
+                    when (it) {
+                        0 -> {
+                            bottomNav.visibility = View.GONE
+                            imgScan.visibility = View.GONE
+                        }
+                        1 -> {
+                            bottomNav.visibility = View.VISIBLE
+                            imgScan.visibility = View.VISIBLE
+                        }
+                    }
+
+                })
         }
     }
 

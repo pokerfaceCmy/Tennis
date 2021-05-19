@@ -6,7 +6,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.pcyun.common.base.BaseFragment
 import com.wetech.aus.tennis.app.R
 import com.wetech.aus.tennis.app.databinding.FragmentCourtsBinding
-import com.wetech.aus.tennis.app.domian.courts.ui.LocationFragment
 import com.wetech.aus.tennis.app.domian.courts.ui.MapsFragment
 import com.wetech.aus.tennis.app.domian.courts.ui.RecommendFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +23,7 @@ class CourtsFragment : BaseFragment<FragmentCourtsBinding>() {
         binding.apply {
             val titles = arrayOf(getString(R.string.recommend), getString(R.string.locations))
             toolBar.tvTitle.text = getString(R.string.courts)
-
+            viewPager2.isUserInputEnabled = false
             viewPager2.adapter = object : FragmentStateAdapter(this@CourtsFragment) {
                 override fun getItemCount(): Int {
                     return 2

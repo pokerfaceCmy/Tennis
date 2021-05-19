@@ -1,18 +1,15 @@
 package com.wetech.aus.tennis.app.domian.courts.ui
 
-import androidx.fragment.app.Fragment
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.pcyun.common.base.BaseFragment
 import com.wetech.aus.tennis.app.R
 import com.wetech.aus.tennis.app.databinding.FragmentMapsBinding
@@ -20,6 +17,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MapsFragment : BaseFragment<FragmentMapsBinding>() {
+    companion object {
+        const val MAP_FRAGMENT_RESUME = "MapsFragmentResume"
+    }
 
     private val callback = OnMapReadyCallback { googleMap ->
         val sydney = LatLng(-34.0, 151.0)
@@ -42,6 +42,15 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>() {
     }
 
     override fun init() {
+    }
 
+    override fun onResume() {
+        super.onResume()
+        LiveEventBus.get(MAP_FRAGMENT_RESUME).post(0)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        LiveEventBus.get(MAP_FRAGMENT_RESUME).post(1)
     }
 }

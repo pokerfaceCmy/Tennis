@@ -66,6 +66,8 @@ dependencies {
     //viewmodel
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewmodel_version"
     api "androidx.lifecycle:lifecycle-runtime-ktx:$viewmodel_version"
+    //事件总线
+    api 'com.jeremyliao:live-event-bus-x:1.7.3'
     //lottie 动画库
     api "com.airbnb.android:lottie:$lottie_version"
     //xpopup 弹窗
