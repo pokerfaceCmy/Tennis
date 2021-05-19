@@ -18,7 +18,7 @@ import com.lxj.xpopup.XPopup
 import com.lxj.xpopup.core.BasePopupView
 import com.lxj.xpopup.interfaces.XPopupCallback
 import com.pcyun.common.IUIActionEventObserver
-import com.pcyun.common.dialog.LoadingDialogSimple
+import com.pcyun.common.widget.dialog.LoadingDialogSimple
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import timber.log.Timber

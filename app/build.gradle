@@ -5,6 +5,7 @@ plugins {
     id 'com.google.gms.google-services'
     id 'com.google.firebase.firebase-perf'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.secrets_gradle_plugin' version "0.6"
 }
 
 static def gitVersionCode() {
@@ -87,9 +88,12 @@ dependencies {
     // Also declare the dependency for the Google Play services library and specify its version
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation 'com.google.firebase:firebase-perf-ktx'
+    implementation 'com.google.android.gms:play-services-maps:17.0.1'
 
     //阿里路由框架
     implementation 'com.alibaba:arouter-api:1.5.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     kapt 'com.alibaba:arouter-compiler:1.5.1'
     //hilt
     implementation "com.google.dagger:hilt-android:${hilt_version}"

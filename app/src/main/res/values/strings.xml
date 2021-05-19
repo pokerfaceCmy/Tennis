@@ -11,4 +11,6 @@
     <string name="user_level">User level</string>
     <string name="member_expiration_date">Member expiration date</string>
     <string name="growth_value">Growth value</string>
+    <string name="recommend">Recommend</string>
+    <string name="locations">Locations</string>
 </resources>

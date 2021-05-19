@@ -1,4 +1,4 @@
-package com.pcyun.common.dialog
+package com.pcyun.common.widget.dialog
 
 import android.content.Context
 import com.lxj.xpopup.core.CenterPopupView
