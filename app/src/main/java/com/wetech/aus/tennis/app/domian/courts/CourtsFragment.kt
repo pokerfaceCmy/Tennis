@@ -23,8 +23,9 @@ class CourtsFragment : BaseFragment<FragmentCourtsBinding>() {
         binding.apply {
             val titles = arrayOf(getString(R.string.recommend), getString(R.string.locations))
             toolBar.tvTitle.text = getString(R.string.courts)
-            viewPager2.isUserInputEnabled = false
-            viewPager2.adapter = object : FragmentStateAdapter(this@CourtsFragment) {
+            //禁止滑动
+            viewPage.isUserInputEnabled = false
+            viewPage.adapter = object : FragmentStateAdapter(this@CourtsFragment) {
                 override fun getItemCount(): Int {
                     return 2
                 }
@@ -37,7 +38,8 @@ class CourtsFragment : BaseFragment<FragmentCourtsBinding>() {
                     }
                 }
             }
-            TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
+            //关联tab栏
+            TabLayoutMediator(tabLayout, viewPage) { tab, position ->
                 tab.text = titles[position]
             }.attach()
         }

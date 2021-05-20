@@ -71,7 +71,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     bottomNav.menu.getItem(mPosition).isChecked = true
                 }
             })
+            //禁止滑动
             viewPage.isUserInputEnabled = false
+
             //如果是地图页面的话,隐藏底部导航栏
             LiveEventBus.get(MAP_FRAGMENT_RESUME, Int::class.java)
                 .observe(mLifecycleOwner, {
