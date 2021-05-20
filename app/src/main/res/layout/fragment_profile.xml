@@ -113,7 +113,7 @@
                 app:layout_constraintTop_toTopOf="@+id/ivVip" />
 
             <TextView
-                android:id="@+id/tv1"
+                android:id="@+id/tv0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4.5dp"
@@ -135,10 +135,10 @@
                 android:progressDrawable="@drawable/progressbar_bg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv1" />
+                app:layout_constraintTop_toBottomOf="@+id/tv0" />
 
             <TextView
-                android:id="@+id/tv2"
+                android:id="@+id/tvGrowthValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -156,9 +156,10 @@
                 android:layout_marginEnd="20dp"
                 android:textColor="#737373"
                 android:textSize="11sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tv2"
+                app:layout_constraintBottom_toBottomOf="@+id/tvGrowthValue"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv2"
+                app:layout_constraintTop_toTopOf="@+id/tvGrowthValue"
+                tools:ignore="SmallSp"
                 tools:text="再积174经验可升级>VIP2会员" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -188,7 +189,256 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clSpend"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv1"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginStart="14.5dp"
+                    android:contentDescription="@string/image_data_null"
+                    android:src="@drawable/ic_profile_spend"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:text="@string/records_of_consumption"
+                    android:textColor="@color/text_title"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv1"
+                    app:layout_constraintStart_toEndOf="@+id/iv1"
+                    app:layout_constraintTop_toTopOf="@+id/iv1" />
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="20dp"
+                    android:contentDescription="@string/image_data_null"
+                    android:src="@drawable/ic_select"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="#DDDDDD"
+                    android:contentDescription="@string/image_data_null"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clRecord"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clSpend">
+
+                <ImageView
+                    android:id="@+id/iv2"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginStart="14.5dp"
+                    android:contentDescription="@string/image_data_null"
+                    android:src="@drawable/ic_profile_record"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:text="@string/my_record"
+                    android:textColor="@color/text_title"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv2"
+                    app:layout_constraintStart_toEndOf="@+id/iv2"
+                    app:layout_constraintTop_toTopOf="@+id/iv2" />
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="20dp"
+                    android:contentDescription="@string/image_data_null"
+                    android:src="@drawable/ic_select"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="#DDDDDD"
+                    android:contentDescription="@string/image_data_null"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clCompetition"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clRecord">
+
+                <ImageView
+                    android:id="@+id/iv3"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginStart="14.5dp"
+                    android:contentDescription="@string/image_data_null"
+                    android:src="@drawable/ic_profile_competition"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:text="@string/my_competition"
+                    android:textColor="@color/text_title"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv3"
+                    app:layout_constraintStart_toEndOf="@+id/iv3"
+                    app:layout_constraintTop_toTopOf="@+id/iv3" />
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="20dp"
+                    android:contentDescription="@string/image_data_null"
+                    android:src="@drawable/ic_select"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="#DDDDDD"
+                    android:contentDescription="@string/image_data_null"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clPlayingRecord"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clCompetition">
+
+                <ImageView
+                    android:id="@+id/iv4"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginStart="14.5dp"
+                    android:contentDescription="@string/image_data_null"
+                    android:src="@drawable/ic_profile_playing_record"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:text="@string/playing_record"
+                    android:textColor="@color/text_title"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv4"
+                    app:layout_constraintStart_toEndOf="@+id/iv4"
+                    app:layout_constraintTop_toTopOf="@+id/iv4" />
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="20dp"
+                    android:contentDescription="@string/image_data_null"
+                    android:src="@drawable/ic_select"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="#DDDDDD"
+                    android:contentDescription="@string/image_data_null"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clMyService"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clPlayingRecord">
+
+                <ImageView
+                    android:id="@+id/iv5"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginStart="14.5dp"
+                    android:contentDescription="@string/image_data_null"
+                    android:src="@drawable/ic_profile_my_service"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:text="@string/my_service"
+                    android:textColor="@color/text_title"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv5"
+                    app:layout_constraintStart_toEndOf="@+id/iv5"
+                    app:layout_constraintTop_toTopOf="@+id/iv5" />
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="20dp"
+                    android:contentDescription="@string/image_data_null"
+                    android:src="@drawable/ic_select"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="#DDDDDD"
+                    android:contentDescription="@string/image_data_null"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

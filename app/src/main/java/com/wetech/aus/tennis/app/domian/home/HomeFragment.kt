@@ -17,7 +17,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun init() {
         binding.apply {
             toolBar.tvTitle.text = getString(R.string.hi_tennis)
-
         }
     }
 

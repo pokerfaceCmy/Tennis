@@ -1,6 +1,8 @@
 package com.wetech.aus.tennis.app.domian
 
+import android.content.Intent
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -8,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.jeremyliao.liveeventbus.LiveEventBus
+import com.king.zxing.CameraScan
+import com.king.zxing.CaptureActivity
 import com.pcyun.common.base.BaseActivity
 import com.wetech.aus.tennis.app.R
 import com.wetech.aus.tennis.app.databinding.ActivityMainBinding
@@ -18,8 +22,22 @@ import com.wetech.aus.tennis.app.domian.home.HomeFragment
 import com.wetech.aus.tennis.app.domian.profile.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
+    private var activityResultLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            val requestCodeScan = 0X01
+            val data = it.data
+            when (it.resultCode) {
+                requestCodeScan -> {
+                    CameraScan.parseScanResult(data)
+                }
+            }
+        }
+
     override fun init() {
         binding.apply {
 
@@ -34,7 +52,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     R.id.menu_home -> viewPage.setCurrentItem(0, true)
                     R.id.menu_courts -> viewPage.setCurrentItem(1, true)
                     R.id.menu_empty -> {
-                        scanQRCode()
+                        activityResultLauncher.launch(Intent(mContext, CaptureActivity::class.java))
+
                     }
                     R.id.menu_booking -> viewPage.setCurrentItem(2, true)
                     R.id.menu_Profile -> viewPage.setCurrentItem(3, true)
@@ -69,9 +88,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
                 })
         }
-    }
-
-    private fun scanQRCode() {
     }
 
     class ViewPager2Adapter(supportFragmentManager: FragmentManager, lifecycle: Lifecycle) :
