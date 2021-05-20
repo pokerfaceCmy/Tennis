@@ -4,7 +4,6 @@ import coil.load
 import com.pcyun.common.base.BaseFragment
 import com.wetech.aus.tennis.app.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 /**
  * @Author: pokerfaceCmy
@@ -18,6 +17,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         binding.apply {
             imgAvatar.load("https://avatars.githubusercontent.com/u/43669001?v=4")
             tvUserName.text = "pokerfaceCmy"
+            ratingBar.rating = 3f
+            tvGrowthValueContent.text = "再积174经验可升级>VIP2会员"
         }
     }
 }

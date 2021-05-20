@@ -118,4 +118,6 @@ dependencies {
     //权限管理
     implementation "com.github.permissions-dispatcher:permissionsdispatcher:4.8.0"
     kapt "com.github.permissions-dispatcher:permissionsdispatcher-processor:4.8.0"
+    //评分
+    implementation 'com.github.giswangsj:AndRatingBar:1.0.5'
 }

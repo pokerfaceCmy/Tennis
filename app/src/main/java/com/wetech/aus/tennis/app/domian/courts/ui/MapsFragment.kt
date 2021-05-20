@@ -26,9 +26,11 @@ class MapsFragment :
     BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
     private lateinit var map: GoogleMap
     private lateinit var mMapView: MapView
+
     private val fusedLocationClient by lazy {
         LocationServices.getFusedLocationProviderClient(activity as Activity)
     }
+
     private lateinit var permissionsRequester: PermissionsRequester
 
     override fun onAttach(context: Context) {
@@ -63,11 +65,6 @@ class MapsFragment :
         return rootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-//        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-//        mapFragment?.getMapAsync(this)
-    }
 
     override fun onResume() {
         super.onResume()
