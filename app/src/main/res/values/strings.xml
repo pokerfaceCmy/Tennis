@@ -11,7 +11,6 @@
     <string name="user_level">User level</string>
     <string name="member_expiration_date">Member expiration date</string>
     <string name="growth_value">Growth value</string>
-    <string name="recommend">Recommend</string>
     <string name="locations">Locations</string>
     <string name="records_of_consumption">Records of consumption</string>
     <string name="image_data_null">image data null</string>
@@ -19,4 +18,6 @@
     <string name="my_competition">My competition</string>
     <string name="playing_record">Playing record</string>
     <string name="my_service">My service</string>
+    <string name="search">search</string>
+    <string name="recommend">Recommend</string>
 </resources>

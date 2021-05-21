@@ -2,14 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="298dp"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="15dp"
     android:layout_marginBottom="15dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
-        android:layout_height="120dp"
+        android:layout_height="125dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
         app:cardCornerRadius="2dp"
@@ -27,21 +27,31 @@
                 android:id="@+id/tvName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="125dp"
+                android:layout_marginStart="110dp"
                 android:layout_marginTop="23dp"
+                android:layout_marginEnd="7dp"
                 android:ellipsize="end"
                 android:lines="1"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="XXXXX Tennis Club" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginEnd="22dp"
+                android:src="@drawable/ic_favorites_h"
+                app:layout_constraintBottom_toBottomOf="@+id/tvName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvName" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/img"
-        android:layout_width="130dp"
-        android:layout_height="120dp"
+        android:layout_width="90dp"
+        android:layout_height="125dp"
         android:elevation="11dp"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"

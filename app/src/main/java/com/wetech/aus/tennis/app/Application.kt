@@ -3,6 +3,7 @@ package com.wetech.aus.tennis.app
 import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.AppUtils
+import com.google.firebase.FirebaseApp
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.HiltAndroidApp
@@ -20,6 +21,7 @@ class Application : Application() {
         super.onCreate()
         initLog()
         initARouter()
+        FirebaseApp.initializeApp(this)
     }
 
     private fun initARouter() {

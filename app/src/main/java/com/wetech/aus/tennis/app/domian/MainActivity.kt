@@ -40,7 +40,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun init() {
         binding.apply {
-
             viewPage.adapter = ViewPager2Adapter(supportFragmentManager, lifecycle)
             viewPage.offscreenPageLimit = 4
             (viewPage.getChildAt(0) as RecyclerView).overScrollMode =
@@ -53,7 +52,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     R.id.menu_courts -> viewPage.setCurrentItem(1, true)
                     R.id.menu_empty -> {
                         activityResultLauncher.launch(Intent(mContext, CaptureActivity::class.java))
-
                     }
                     R.id.menu_booking -> viewPage.setCurrentItem(2, true)
                     R.id.menu_Profile -> viewPage.setCurrentItem(3, true)
@@ -90,6 +88,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
                 })
         }
+
     }
 
     class ViewPager2Adapter(supportFragmentManager: FragmentManager, lifecycle: Lifecycle) :

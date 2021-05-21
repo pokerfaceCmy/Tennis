@@ -88,8 +88,11 @@ class MapsFragment :
         map.uiSettings.isMyLocationButtonEnabled = true
         //地图中心位置移动到定位位置，并设置地图缩放等级15
         fusedLocationClient.lastLocation.addOnSuccessListener {
-            val latLng = LatLng(it.latitude, it.longitude)
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+            it?.let {
+                val latLng = LatLng(it.latitude, it.longitude)
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+
+            }
         }
     }
 
