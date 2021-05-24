@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="298dp"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="15dp"
-    android:layout_marginBottom="15dp">
+    android:layout_marginStart="15dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
@@ -32,19 +31,56 @@
                 android:layout_marginEnd="7dp"
                 android:ellipsize="end"
                 android:lines="1"
+                app:layout_constraintEnd_toStartOf="@+id/ivLike"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="XXXXX Tennis Club" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/ivLike"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_marginEnd="22dp"
-                android:src="@drawable/ic_favorites_h"
+                android:contentDescription="@string/image_data_null"
+                android:src="@drawable/ic_favorites_n"
                 app:layout_constraintBottom_toBottomOf="@+id/tvName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tvName" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="3dp"
+                android:background="#DDDDDD"
+                android:contentDescription="@string/image_data_null"
+                app:layout_constraintEnd_toEndOf="@+id/ivLike"
+                app:layout_constraintStart_toStartOf="@+id/tvName"
+                app:layout_constraintTop_toBottomOf="@+id/ivLike" />
+
+            <ImageView
+                android:id="@+id/ivMore"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginEnd="0.5dp"
+                android:contentDescription="@string/image_data_null"
+                android:src="@drawable/ic_more"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvContent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2.5dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                app:layout_constraintEnd_toStartOf="@+id/ivMore"
+                app:layout_constraintStart_toStartOf="@+id/tvName"
+                app:layout_constraintTop_toTopOf="@+id/ivMore"
+                tools:text="餐饮住宿一应俱全餐饮住宿一应俱餐饮住宿一应俱全餐饮住宿一应俱" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

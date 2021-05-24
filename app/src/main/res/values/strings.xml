@@ -20,4 +20,10 @@
     <string name="my_service">My service</string>
     <string name="search">search</string>
     <string name="recommend">Recommend</string>
+    <string name="favourites">Favourites</string>
+    <string name="club_facilities">Club Facilities</string>
+    <string name="coach_team">Coach Team</string>
+    <string name="booking">booking</string>
+    <string name="membership">membership</string>
+    <string name="visitor_enter">visitor enter</string>
 </resources>
