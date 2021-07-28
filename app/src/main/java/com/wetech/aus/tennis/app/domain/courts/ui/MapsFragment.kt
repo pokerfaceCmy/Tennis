@@ -21,8 +21,7 @@ import permissions.dispatcher.ktx.constructPermissionsRequest
 import timber.log.Timber
 
 @AndroidEntryPoint
-class MapsFragment :
-    BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
+class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
     private lateinit var map: GoogleMap
     private lateinit var mMapView: MapView
 

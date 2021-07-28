@@ -66,5 +66,5 @@
         app:layout_constraintStart_toStartOf="@+id/tvPhoneNum"
         app:layout_constraintTop_toBottomOf="@+id/tvPhoneNum"
         app:lineThickness="1dp"
-        app:noOfFields="4" />
+        app:noOfFields="6" />
 </androidx.constraintlayout.widget.ConstraintLayout>
