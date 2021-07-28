@@ -48,20 +48,23 @@
         app:layout_constraintTop_toBottomOf="@+id/tv2"
         tools:text="+86 13611112222" />
 
-    <com.lwjfork.code.CodeEditText
+    <com.poovam.pinedittextfield.LinePinField
+        android:layout_marginTop="40dp"
         android:id="@+id/codeEditText"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginTop="25dp"
         android:layout_marginEnd="25dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
+        android:background="@color/white"
         android:inputType="number"
-        app:blockShape="underline"
-        app:blockSpace="10dp"
-        app:codeInputType="text"
+        android:textSelectHandle="@drawable/text_handle"
+        app:bottomTextPaddingDp="5dp"
+        app:fieldColor="@color/gray"
+        app:highlightType="allFields"
+        app:isCursorEnabled="true"
+        app:isCustomBackground="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tvPhoneNum"
-        app:layout_constraintTop_toBottomOf="@+id/tvPhoneNum" />
-
+        app:layout_constraintTop_toBottomOf="@+id/tvPhoneNum"
+        app:lineThickness="1dp"
+        app:noOfFields="4" />
 </androidx.constraintlayout.widget.ConstraintLayout>

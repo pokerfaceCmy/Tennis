@@ -2,8 +2,8 @@ package com.wetech.aus.tennis.app.domain.login
 
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.lwjfork.code.CodeEditText
 import com.poker.common.base.BaseActivity
+import com.poovam.pinedittextfield.PinField
 import com.wetech.aus.tennis.app.databinding.ActivityVerificationCodeBinding
 import com.wetech.aus.tennis.app.domain.RoutePath
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,21 +14,16 @@ class VerificationCodeActivity : BaseActivity<ActivityVerificationCodeBinding>()
     override fun init() {
         binding.apply {
             btnBack.setOnClickListener { finish() }
-            codeEditText.setOnTextChangedListener(object : CodeEditText.OnTextChangedListener {
-                override fun onCodeChanged(changeText: CharSequence?) {
-
-                }
-
-                override fun onInputCompleted(text: CharSequence?) {
-                    // FIXME: 2021/7/28 just for test
-                    if (text.toString() == "941021") {
+            codeEditText.onTextCompleteListener = object : PinField.OnTextCompleteListener {
+                override fun onTextComplete(enteredText: String): Boolean {
+                    if (enteredText == "1021") {
                         ARouter.getInstance()
                             .build(RoutePath.MainActivity)
                             .navigation()
                     }
-                    // TODO: 2021/7/28 校验验证码
+                    return true
                 }
-            })
+            }
         }
     }
 }

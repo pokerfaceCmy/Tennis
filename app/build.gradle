@@ -108,15 +108,15 @@ dependencies {
     kapt Deps.Jetpack.Hilt.hiltAndroidCompiler
     kapt Deps.Jetpack.Hilt.hiltCompiler
     //二维码
-    implementation 'com.king.zxing:zxing-lite:2.0.3'
+    implementation Deps.Util.zxingLite
     //权限管理
-    api 'com.github.permissions-dispatcher:permissionsdispatcher:4.8.0'
-    implementation "com.github.permissions-dispatcher:ktx:1.0.5"
-    kapt 'com.github.permissions-dispatcher:permissionsdispatcher-processor:4.8.0'
+    implementation Deps.Permissions.permissionsdispatcher
+    implementation Deps.Permissions.ktx
+    kapt Deps.Permissions.processor
     //评分
     implementation 'com.github.wsj1024:AndRatingBar:1.0.6'
     //banner
     implementation 'com.github.zhpanvip:BannerViewPager:3.5.0'
     //输入框
-    implementation 'io.github.lwjfork:CodeEditText:1.0.5'
+    implementation 'com.github.poovamraj:PinEditTextField:1.2.6'
 }

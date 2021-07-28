@@ -1,4 +1,5 @@
-import com.poker.plugin.*
+import com.poker.plugin.BuildConfig
+import com.poker.plugin.Deps
 
 plugins {
     id 'com.android.library'
@@ -103,10 +104,10 @@ dependencies {
     api Deps.Util.baseRecyclerViewAdapterHelper
 
     //刷新
-    api 'com.scwang.smart:refresh-layout-kernel:2.0.3'//核心必须依赖
-    api 'com.scwang.smart:refresh-footer-classics:2.0.3'    //经典加载
-    api 'com.scwang.smart:refresh-header-classics:2.0.3'    //经典刷新头
+    api Deps.Refresh.kernel
+    api Deps.Refresh.footer
+    api Deps.Refresh.header
     //eventBus
-    api 'io.github.jeremyliao:live-event-bus-x:1.8.0'
+    api Deps.Util.eventBus
 
 }

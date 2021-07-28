@@ -5,16 +5,6 @@ package com.poker.plugin
 // 统一管理项目中使用的依赖库
 object Deps {
 
-//    object Config {
-//        const val compileSdkVersion = 30
-//        const val buildToolsVersion = "30.0.3"
-//        const val applicationId = "com.poker.pixiu"
-//        const val minSdkVersion = 23
-//        const val targetSdkVersion = 30
-//        const val versionCode = 1
-//        const val versionName = "0.0.1"
-//    }
-
     const val androidGradlePlugin = "com.android.tools.build:gradle:4.2.2"
     const val jdkDesugar = "com.android.tools:desugar_jdk_libs:1.0.9"
 
@@ -130,7 +120,7 @@ object Deps {
     }
 
     object Image {
-        private const val version = "1.2.2"
+        private const val version = "1.3.0"
 
         /**
          * @see <a href="https://github.com/coil-kt/coil/blob/main/README-zh.md">
@@ -144,12 +134,39 @@ object Deps {
         const val logger = "com.orhanobut:logger:2.2.0"
     }
 
+    object Permissions {
+        private const val version = "4.8.0"
+
+        // https://github.com/permissions-dispatcher/PermissionsDispatcher
+        const val permissionsdispatcher =
+            "com.github.permissions-dispatcher:permissionsdispatcher:$version"
+        const val processor =
+            "com.github.permissions-dispatcher:permissionsdispatcher-processor:$version"
+        const val ktx = "com.github.permissions-dispatcher:ktx:1.0.5"
+    }
+
+    object Refresh {
+        private const val version = "2.0.3"
+
+        const val kernel = "com.scwang.smart:refresh-layout-kernel:$version"
+        const val footer = "com.scwang.smart:refresh-footer-classics:$version"
+        const val header = "com.scwang.smart:refresh-header-classics:$version"
+    }
+
     object Util {
         /**
          * @see <a href="https://github.com/JessYanCoding/AndroidAutoSize">
          *     今日头条屏幕适配方案终极版，一个极低成本的 Android 屏幕适配方案</a>
          */
         const val autosize = "com.github.JessYanCoding:AndroidAutoSize:v1.2.1"
+
+        /**
+         * @see <a href="https://github.com/jenly1314/ZXingLite">
+         *     基于ZXing库优化扫码和生成二维码/条形码功能</a>
+         */
+        const val zxingLite = "com.github.jenly1314:zxing-lite:2.1.0"
+
+        const val eventBus = "io.github.jeremyliao:live-event-bus-x:1.8.0"
 
         /**
          * @see <a href="https://github.com/Ye-Miao/StatusBarUtil">
@@ -181,5 +198,7 @@ object Deps {
          *     Android 图表控件</a>
          */
         const val AAChartCore = "com.github.AAChartModel:AAChartCore-Kotlin:-SNAPSHOT"
+
+
     }
 }
