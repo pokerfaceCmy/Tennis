@@ -8,20 +8,24 @@ package com.wetech.aus.tennis.app.domain
  */
 class RoutePath {
     companion object {
-        object Home {
-        }
+        const val MainActivity = "/main/MainActivity"
 
-        object Courts {
+        object Login{
+            const val VerificationCodeActivity = "/login/VerificationCodeActivity"
+            const val PasswordLoginActivity = "/login/PasswordLoginActivity"
+            const val RetrievePswActivity = "/login/RetrievePswActivity"
         }
+        object Home
 
-        object Booking {
-        }
+        object Courts
 
-        object Profile {
-        }
+        object Booking
+
+        object Profile
 
         object Club{
             const val ClubDetailActivity = "/club/ClubDetailActivity"
+            const val ClubBookingActivity = "/club/ClubBookingActivity"
         }
     }
 }

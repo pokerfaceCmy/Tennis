@@ -71,9 +71,7 @@ dependencies {
     //lottie 动画库
     api "com.airbnb.android:lottie:$lottie_version"
     //xpopup 弹窗
-    api "com.lxj:xpopup:$xpopup_version"
-    //三级联动
-    api "com.lxj:xpopup-ext:0.0.4"
+    api "com.github.li-xiaojun:XPopup:$xpopup_version"
     //log
     api "com.jakewharton.timber:timber:$timber_version"
     api "com.orhanobut:logger:$logger_version"

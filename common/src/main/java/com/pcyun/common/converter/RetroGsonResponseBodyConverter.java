@@ -26,8 +26,8 @@ import retrofit2.Converter;
 class RetroGsonResponseBodyConverter<T, ApiResultType extends IApiResult> implements
         Converter<ResponseBody, T> {
     private final Gson gson;
-    private Type type;
-    private Class<ApiResultType> apiClass;
+    private final Type type;
+    private final Class<ApiResultType> apiClass;
 
     RetroGsonResponseBodyConverter(Gson gson, Type type, Class<ApiResultType> apiClass) {
         this.gson = gson;

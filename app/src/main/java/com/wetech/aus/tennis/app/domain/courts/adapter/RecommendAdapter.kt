@@ -14,6 +14,7 @@ import com.wetech.aus.tennis.app.domain.RoutePath
  */
 class RecommendAdapter : BaseQuickAdapter<String,BaseViewHolder>(R.layout.item_courts_recommend) {
     override fun convert(holder: BaseViewHolder, item: String) {
+
         holder.itemView.setOnClickListener {
             ARouter.getInstance()
                 .build(RoutePath.Companion.Club.ClubDetailActivity)

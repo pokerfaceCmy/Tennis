@@ -24,7 +24,7 @@ buildscript {
         livedata_version = "2.3.1"
         viewmodel_version = "2.3.1"
         lottie_version = "3.7.0"
-        xpopup_version = "2.2.23"
+        xpopup_version = "2.5.3"
         timber_version = "4.7.1"
         logger_version = "2.2.0"
         room_version = "2.3.0"
@@ -39,7 +39,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.1'
+        classpath 'com.android.tools.build:gradle:4.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         classpath "com.google.gms:google-services:$google_services_version"

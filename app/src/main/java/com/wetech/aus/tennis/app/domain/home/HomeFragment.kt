@@ -47,6 +47,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     "https://images.uiiiuiii.com/wp-content/uploads/2021/05/i-banner-ww0511-1-06.jpg",
                 )
             )
+            mViewPager.setLifecycleRegistry(lifecycle)
 
             rvRecommend.layoutManager =
                 LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
@@ -57,27 +58,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
 
             rvFavourites.layoutManager =
-                 LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false)
+                LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
             rvFavourites.adapter = favouriteAdapter
             val pagerSnapHelper1 = PagerSnapHelper()
             pagerSnapHelper1.attachToRecyclerView(rvFavourites)
             favouriteAdapter.setList(mutableListOf("", "", "", ""))
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        mViewPager.stopLoop()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mViewPager.startLoop()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mViewPager.stopLoop()
     }
 
     class BannerAdapter : BaseBannerAdapter<String>() {

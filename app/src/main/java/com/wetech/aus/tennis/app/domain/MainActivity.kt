@@ -9,6 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.king.zxing.CameraScan
 import com.king.zxing.CaptureActivity
@@ -22,7 +23,7 @@ import com.wetech.aus.tennis.app.domain.home.HomeFragment
 import com.wetech.aus.tennis.app.domain.profile.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
 
-
+@Route(path = RoutePath.MainActivity)
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
     private var activityResultLauncher =
@@ -46,7 +47,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 RecyclerView.OVER_SCROLL_NEVER
 
             //点击底部导航栏时 控制ViewPager的变化
-            bottomNav.setOnNavigationItemSelectedListener {
+                bottomNav.setOnNavigationItemSelectedListener {
                 when (it.itemId) {
                     R.id.menu_home -> viewPage.setCurrentItem(0, true)
                     R.id.menu_courts -> viewPage.setCurrentItem(1, true)

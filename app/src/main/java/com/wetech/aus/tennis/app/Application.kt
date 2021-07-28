@@ -17,6 +17,7 @@ import timber.log.Timber
  */
 @HiltAndroidApp
 class Application : Application() {
+
     override fun onCreate() {
         super.onCreate()
         initLog()
@@ -36,4 +37,5 @@ class Application : Application() {
         Logger.addLogAdapter(AndroidLogAdapter())
         if (AppUtils.isAppDebug()) Timber.plant(Timber.DebugTree())
     }
+
 }

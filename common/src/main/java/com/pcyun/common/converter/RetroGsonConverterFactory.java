@@ -23,7 +23,7 @@ import retrofit2.Retrofit;
  */
 public class RetroGsonConverterFactory<ApiResultType extends IApiResult> extends Converter.Factory {
     private final Gson gson;
-    private Class<ApiResultType> apiClass;
+    private final Class<ApiResultType> apiClass;
 
     private RetroGsonConverterFactory(Gson gson, Class<ApiResultType> apiClass) {
         this.gson = gson;

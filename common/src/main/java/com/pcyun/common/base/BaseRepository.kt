@@ -6,6 +6,4 @@ package com.pcyun.common.base
  * @Desc: TODO
  * @GitHub：https://github.com/pokerfaceCmy
  */
-open class BaseRepository {
-
-}
+open class BaseRepository
