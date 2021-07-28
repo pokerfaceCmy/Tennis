@@ -1,6 +1,6 @@
 package com.wetech.aus.tennis.app.domain.courts.ui
 
-import com.pcyun.common.base.BaseFragment
+import com.poker.common.base.BaseFragment
 import com.wetech.aus.tennis.app.databinding.FragmentLocationBinding
 import dagger.hilt.android.AndroidEntryPoint
 

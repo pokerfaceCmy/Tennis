@@ -1,7 +1,7 @@
 package com.wetech.aus.tennis.app.domain.courts.ui
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.pcyun.common.base.BaseFragment
+import com.poker.common.base.BaseFragment
 import com.wetech.aus.tennis.app.databinding.FragmentRecommendBinding
 import com.wetech.aus.tennis.app.domain.courts.adapter.RecommendAdapter
 import dagger.hilt.android.AndroidEntryPoint

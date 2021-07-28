@@ -2,7 +2,7 @@ package com.wetech.aus.tennis.app.domain.login
 
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.pcyun.common.base.BaseActivity
+import com.poker.common.base.BaseActivity
 import com.wetech.aus.tennis.app.databinding.ActivityPasswordLoginBinding
 import com.wetech.aus.tennis.app.domain.RoutePath
 import dagger.hilt.android.AndroidEntryPoint

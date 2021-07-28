@@ -1,7 +1,7 @@
 package com.wetech.aus.tennis.app.domain.club
 
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.pcyun.common.base.BaseActivity
+import com.poker.common.base.BaseActivity
 import com.wetech.aus.tennis.app.R
 import com.wetech.aus.tennis.app.databinding.ActivityClubBookingBinding
 import com.wetech.aus.tennis.app.domain.RoutePath

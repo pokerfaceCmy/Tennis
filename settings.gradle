@@ -1,3 +1,4 @@
 rootProject.name = "Tennis"
 include ':app'
 include ':common'
+includeBuild 'versionPlugin'

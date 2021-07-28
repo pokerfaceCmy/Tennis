@@ -3,7 +3,7 @@ package com.wetech.aus.tennis.app.domain.courts
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
-import com.pcyun.common.base.BaseFragment
+import com.poker.common.base.BaseFragment
 import com.wetech.aus.tennis.app.R
 import com.wetech.aus.tennis.app.databinding.FragmentCourtsBinding
 import com.wetech.aus.tennis.app.domain.courts.ui.MapsFragment

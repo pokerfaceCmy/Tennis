@@ -4,7 +4,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import coil.load
-import com.pcyun.common.base.BaseFragment
+import com.poker.common.base.BaseFragment
 import com.wetech.aus.tennis.app.R
 import com.wetech.aus.tennis.app.databinding.FragmentHomeBinding
 import com.wetech.aus.tennis.app.domain.home.adapter.FavouriteAdapter

@@ -1,7 +1,7 @@
 package com.wetech.aus.tennis.app.domain.profile
 
 import coil.load
-import com.pcyun.common.base.BaseFragment
+import com.poker.common.base.BaseFragment
 import com.wetech.aus.tennis.app.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 

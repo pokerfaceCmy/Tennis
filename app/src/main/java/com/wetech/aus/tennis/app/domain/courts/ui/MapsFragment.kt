@@ -12,14 +12,13 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.jeremyliao.liveeventbus.LiveEventBus
-import com.pcyun.common.base.BaseFragment
+import com.poker.common.base.BaseFragment
 import com.wetech.aus.tennis.app.R
 import com.wetech.aus.tennis.app.databinding.FragmentMapsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import permissions.dispatcher.ktx.PermissionsRequester
 import permissions.dispatcher.ktx.constructPermissionsRequest
 import timber.log.Timber
-
 
 @AndroidEntryPoint
 class MapsFragment :
@@ -68,12 +67,12 @@ class MapsFragment :
 
     override fun onResume() {
         super.onResume()
-        LiveEventBus.get(MAP_FRAGMENT_RESUME).post(0)
+        LiveEventBus.get(MAP_FRAGMENT_RESUME, Int::class.java).post(0)
     }
 
     override fun onPause() {
         super.onPause()
-        LiveEventBus.get(MAP_FRAGMENT_RESUME).post(1)
+        LiveEventBus.get(MAP_FRAGMENT_RESUME, Int::class.java).post(1)
     }
 
     override fun init() {
@@ -99,7 +98,7 @@ class MapsFragment :
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         map.setMinZoomPreference(15f)
-        permissionsRequester.launch()
+//        permissionsRequester.launch()
     }
 
 }

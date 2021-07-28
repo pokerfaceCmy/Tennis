@@ -1,4 +1,7 @@
+import com.poker.plugin.*
+
 plugins {
+    id 'com.poker.plugin'
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
@@ -28,15 +31,15 @@ static def gitVersionTag() {
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    compileSdkVersion BuildConfig.compileSdkVersion
+    buildToolsVersion BuildConfig.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.wetech.aus.tennis.app"
-        minSdkVersion 23
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        applicationId BuildConfig.applicationId
+        minSdkVersion BuildConfig.minSdkVersion
+        targetSdkVersion BuildConfig.targetSdkVersion
+        versionCode BuildConfig.versionCode
+        versionName BuildConfig.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -84,36 +87,32 @@ android {
 
 dependencies {
     implementation project(path: ':common')
-    
-    //Google firebase
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.3.0'
 
+    //Google firebase
     implementation platform('com.google.firebase:firebase-bom:28.0.0')
     implementation 'com.google.firebase:firebase-core:19.0.0'
     implementation 'com.google.firebase:firebase-common-ktx:20.0.0'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
-    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
     implementation 'com.google.firebase:firebase-perf-ktx'
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
 
     //阿里路由框架
-    implementation 'com.alibaba:arouter-api:1.5.2'
-    implementation 'com.google.android.gms:play-services-location:18.0.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    kapt 'com.alibaba:arouter-compiler:1.5.2'
+    //Router
+    implementation Deps.Router.arouterApi
+    kapt Deps.Router.arouterCompiler
     //hilt
-    implementation "com.google.dagger:hilt-android:${hilt_version}"
-    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
-    kapt "com.google.dagger:hilt-android-compiler:${hilt_version}"
-    kapt 'androidx.hilt:hilt-compiler:1.0.0'
+    implementation Deps.Jetpack.Hilt.hiltAndroid
+    kapt Deps.Jetpack.Hilt.hiltAndroidCompiler
+    kapt Deps.Jetpack.Hilt.hiltCompiler
     //二维码
     implementation 'com.king.zxing:zxing-lite:2.0.3'
     //权限管理
-    implementation "com.github.permissions-dispatcher:permissionsdispatcher:4.8.0"
-    kapt "com.github.permissions-dispatcher:permissionsdispatcher-processor:4.8.0"
+    api 'com.github.permissions-dispatcher:permissionsdispatcher:4.8.0'
+    implementation "com.github.permissions-dispatcher:ktx:1.0.5"
+    kapt 'com.github.permissions-dispatcher:permissionsdispatcher-processor:4.8.0'
     //评分
     implementation 'com.github.wsj1024:AndRatingBar:1.0.6'
     //banner

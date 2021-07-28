@@ -5,7 +5,7 @@ import coil.load
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.leaf.library.StatusBarUtil
-import com.pcyun.common.base.BaseActivity
+import com.poker.common.base.BaseActivity
 import com.wetech.aus.tennis.app.databinding.ActivityClubDetailBinding
 import com.wetech.aus.tennis.app.domain.RoutePath
 import com.wetech.aus.tennis.app.domain.club.adapter.CoachAdapter
