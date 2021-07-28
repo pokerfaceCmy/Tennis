@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
     }
     dependencies {
         // 因为使用的 Kotlin 需要需要添加 Kotlin 插件
@@ -13,7 +13,7 @@ apply plugin: 'java-gradle-plugin'
 
 repositories {
     // 需要添加 jcenter 否则会提示找不到 gradlePlugin
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
