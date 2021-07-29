@@ -1,7 +1,6 @@
 package com.poker.common.base
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,19 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
-import com.alibaba.android.arouter.facade.Postcard
-import com.alibaba.android.arouter.facade.callback.NavigationCallback
-import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.ToastUtils
-import com.google.android.material.snackbar.Snackbar
 import com.lxj.xpopup.XPopup
 import com.lxj.xpopup.core.BasePopupView
 import com.lxj.xpopup.interfaces.XPopupCallback
 import com.poker.common.IUIActionEventObserver
-import com.poker.common.widget.dialog.LoadingDialogSimple
+import com.poker.common.widget.dialog.SimpleLoadingDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
-import timber.log.Timber
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -63,7 +57,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment(), IUIActionEventObserv
                             return
                         } else {//取消任务,弹出提示
                             job.cancel()
-                            showSuccessSnackBar("已取消")
+                            showToast("已取消")
                         }
                     }
                 }
@@ -86,10 +80,11 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment(), IUIActionEventObserv
                 }
 
             })
-            .asCustom(mContext?.let { LoadingDialogSimple(it) })
+            .asCustom(mContext?.let { SimpleLoadingDialog(it) })
 
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -121,42 +116,11 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment(), IUIActionEventObserv
     }
 
     override fun dismissLoading() {
-        loadingDialog?.takeIf { it.isShow }?.dismiss()
+        loadingDialog?.takeIf { it.isShow }?.smartDismiss()
     }
 
     override fun showToast(msg: String) {
         ToastUtils.showLong(msg)
-    }
-
-    override fun showSuccessSnackBar(msg: String) {
-        Snackbar.make(binding.root, msg, Snackbar.LENGTH_LONG)
-            .show()
-    }
-
-    override fun showErrorSnackBar(msg: String) {
-        Snackbar.make(binding.root, msg, Snackbar.LENGTH_LONG)
-            .setTextColor(Color.parseColor("#E06C75"))
-            .show()
-    }
-
-    override fun loginAndFinish() {
-        Timber.i("fragment跳到登录")
-        ARouter.getInstance().build("/login/LoginActivity")
-            .navigation(mContext, object : NavigationCallback {
-                override fun onFound(postcard: Postcard?) {
-                }
-
-                override fun onLost(postcard: Postcard?) {
-                }
-
-                override fun onArrival(postcard: Postcard?) {
-                    activity?.finish()
-                }
-
-                override fun onInterrupt(postcard: Postcard?) {
-                }
-
-            })
     }
 
 }

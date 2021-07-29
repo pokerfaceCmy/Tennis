@@ -1,4 +1,4 @@
-package com.poker.common.network.converter.gson
+package com.poker.common.converter.gson
 
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter

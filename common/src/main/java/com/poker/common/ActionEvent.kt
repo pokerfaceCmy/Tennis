@@ -17,5 +17,3 @@ class ShowLoadingWithoutJobEvent : BaseActionEvent()
 class ShowToastEvent(val message: String) : BaseActionEvent()
 
 class DismissLoadingEvent : BaseActionEvent()
-
-class LoginAndFinishEvent : BaseActionEvent()

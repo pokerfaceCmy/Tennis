@@ -20,12 +20,6 @@ interface IUIActionEvent : ICoroutineEvent {
     fun dismissLoading()
 
     fun showToast(msg: String)
-
-    fun showSuccessSnackBar(msg: String)
-
-    fun showErrorSnackBar(msg: String)
-
-    fun loginAndFinish()
 }
 
 interface ICoroutineEvent {
@@ -79,16 +73,15 @@ interface IUIActionEventObserver : IUIActionEvent {
         viewModel.showLoadingEventLD.observe(mLifecycleOwner, Observer {
             this@IUIActionEventObserver.showLoading(it.job)
         })
+
         viewModel.dismissLoadingEventLD.observe(mLifecycleOwner, Observer {
             this@IUIActionEventObserver.dismissLoading()
         })
+
         viewModel.showToastEventLD.observe(mLifecycleOwner, Observer {
             if (it.message.isNotBlank()) {
                 this@IUIActionEventObserver.showToast(it.message)
             }
-        })
-        viewModel.loginAndFinishLD.observe(mLifecycleOwner, Observer {
-            this@IUIActionEventObserver.loginAndFinish()
         })
     }
 }
@@ -103,8 +96,6 @@ interface IViewModelActionEvent : IUIActionEvent {
 
     val showToastEventLD: MutableLiveData<ShowToastEvent>
 
-    val loginAndFinishLD: MutableLiveData<LoginAndFinishEvent>
-
     override fun showLoading(job: Job?) {
         showLoadingEventLD.value = ShowLoadingEvent(job)
     }
@@ -117,20 +108,8 @@ interface IViewModelActionEvent : IUIActionEvent {
         showToastEventLD.value = ShowToastEvent(msg)
     }
 
-    override fun loginAndFinish() {
-        loginAndFinishLD.value = LoginAndFinishEvent()
-    }
-
     override fun showLoading() {
         showLoadingWithoutJobEventLD.value = ShowLoadingWithoutJobEvent()
-    }
-
-    override fun showSuccessSnackBar(msg: String) {
-        TODO("Not yet implemented")
-    }
-
-    override fun showErrorSnackBar(msg: String) {
-        TODO("Not yet implemented")
     }
 
 

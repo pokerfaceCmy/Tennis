@@ -3,7 +3,6 @@ package com.poker.common.converter.gson
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.poker.common.bean.IApiResult
-import com.poker.common.network.converter.gson.RetroGsonRequestBodyConverter
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Converter

@@ -4,13 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.poker.common.*
-import com.poker.common.callback.BaseRequestCallback
 import com.poker.common.callback.RequestCallback
 import com.poker.common.exception.BaseHttpException
-import com.poker.common.exception.LocalException
 import com.poker.common.exception.ServerException
 import kotlinx.coroutines.*
-import timber.log.Timber
 import java.util.*
 
 /**
@@ -21,29 +18,20 @@ import java.util.*
  */
 open class BaseViewModel : ViewModel(), IViewModelActionEvent {
 
-    override fun showSuccessSnackBar(msg: String) {
-    }
+    override val showLoadingEventLD: MutableLiveData<ShowLoadingEvent> =
+        MutableLiveData<ShowLoadingEvent>()
 
-    override fun showErrorSnackBar(msg: String) {
+    override val showLoadingWithoutJobEventLD: MutableLiveData<ShowLoadingWithoutJobEvent> =
+        MutableLiveData<ShowLoadingWithoutJobEvent>()
 
-    }
+    override val dismissLoadingEventLD: MutableLiveData<DismissLoadingEvent> =
+        MutableLiveData<DismissLoadingEvent>()
+
+    override val showToastEventLD: MutableLiveData<ShowToastEvent> =
+        MutableLiveData<ShowToastEvent>()
 
     override val lifecycleSupportedScope: CoroutineScope
         get() = viewModelScope
-
-    override val showLoadingEventLD = MutableLiveData<ShowLoadingEvent>()
-
-    override val dismissLoadingEventLD = MutableLiveData<DismissLoadingEvent>()
-
-    override val showToastEventLD = MutableLiveData<ShowToastEvent>()
-
-    override val showLoadingWithoutJobEventLD = MutableLiveData<ShowLoadingWithoutJobEvent>()
-
-    override val loginAndFinishLD = MutableLiveData<LoginAndFinishEvent>()
-
-
-    protected val data: WeakHashMap<String, Any> = WeakHashMap()
-
 
     fun <Data> enqueue(
         apiFun: suspend () -> Data,
@@ -51,36 +39,66 @@ open class BaseViewModel : ViewModel(), IViewModelActionEvent {
         showErrorMsg: Boolean = true,
         callbackFun: (RequestCallback<Data>.() -> Unit)? = null
     ): Job {
-        return lifecycleSupportedScope.launch(Dispatchers.Main) {
+        return lifecycleSupportedScope.launch {
             val callback = if (callbackFun == null) null else RequestCallback<Data>().apply {
                 callbackFun.invoke(this)
             }
             try {
-                if (showLoading) {
-                    showLoading(coroutineContext[Job])
-                }
                 callback?.onStart?.invoke()
+                if (showLoading) showLoading(coroutineContext[Job])
                 val response: Data?
                 try {
                     response = apiFun.invoke()
+                    onGetResponse(callback, response)
                 } catch (ex: Exception) {
                     handleException(showErrorMsg, ex, callback)
                     return@launch
                 }
-                onGetResponse(callback, response)
             } finally {
                 try {
                     callback?.onFinally?.invoke()
                 } finally {
-                    if (showLoading) {
-                        dismissLoading()
-                        data.clear()
-                    }
+                    if (showLoading) dismissLoading()
                 }
             }
         }
     }
 
+    private fun <Data> handleException(
+        showErrorMsg: Boolean,
+        ex: Exception,
+        callback: RequestCallback<Data>?
+    ) {
+        callback?.let {
+            if (ex is CancellationException) {
+                callback.onCancelled?.invoke()
+            }
+            val exception = generateException(showErrorMsg, ex)
+            callback.onFailed?.invoke(exception)
+        }
+    }
+
+    private fun generateException(showErrorMsg: Boolean, ex: Exception): BaseHttpException {
+        ex.printStackTrace()
+        if (showErrorMsg) showToast(ex.message.toString())
+
+        return when (ex) {
+            is CancellationException -> {
+                BaseHttpException(404, "请求已取消")
+            }
+
+            is ServerException -> {
+                if (showErrorMsg) {
+                    showToast(ex.errMsg)
+                }
+                BaseHttpException(ex.errCode, ex.errMsg)
+            }
+
+            else -> {
+                BaseHttpException(400, "未知错误")
+            }
+        }
+    }
 
     private suspend fun <Data> onGetResponse(callback: RequestCallback<Data>?, httpData: Data?) {
         callback?.let {
@@ -98,46 +116,4 @@ open class BaseViewModel : ViewModel(), IViewModelActionEvent {
             }
         }
     }
-
-    private fun handleException(
-        showErrorMsg: Boolean,
-        ex: Exception,
-        callback: BaseRequestCallback?
-    ) {
-        callback?.let {
-            if (ex is CancellationException) {
-                callback.onCancelled?.invoke()
-                return
-            }
-            val exception = generateException(showErrorMsg, ex)
-            callback.onFailed?.invoke(exception)
-        }
-    }
-
-    private fun generateException(showErrorMsg: Boolean, ex: Exception): BaseHttpException {
-        ex.printStackTrace()
-        return when (ex) {
-            is CancellationException -> {
-                BaseHttpException(404, "请求已取消")
-            }
-            is ServerException -> {
-                if (showErrorMsg) {
-                    showToast(ex.errMsg)
-                }
-                BaseHttpException(ex.errCode, ex.errMsg)
-            }
-            is LocalException -> {
-                if (ex.errCode == 403) {
-                    Timber.i("前往登录页面")
-                    loginAndFinish()
-                }
-                BaseHttpException(ex.errCode, ex.errMsg)
-            }
-            else -> {
-                BaseHttpException(400, "未知错误")
-            }
-        }
-
-    }
-
 }

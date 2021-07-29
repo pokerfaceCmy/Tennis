@@ -8,20 +8,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
-import com.alibaba.android.arouter.facade.Postcard
-import com.alibaba.android.arouter.facade.callback.NavigationCallback
-import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.ToastUtils
-import com.google.android.material.snackbar.Snackbar
 import com.leaf.library.StatusBarUtil
 import com.lxj.xpopup.XPopup
 import com.lxj.xpopup.core.BasePopupView
 import com.lxj.xpopup.interfaces.XPopupCallback
 import com.poker.common.IUIActionEventObserver
-import com.poker.common.widget.dialog.LoadingDialogSimple
+import com.poker.common.widget.dialog.SimpleLoadingDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
-import timber.log.Timber
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -64,7 +59,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(),
                             return
                         } else {//取消任务,弹出提示
                             job.cancel()
-                            showSuccessSnackBar("已取消")
+                            showToast("已取消")
                         }
                     }
                 }
@@ -87,7 +82,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(),
                 }
 
             })
-            .asCustom(LoadingDialogSimple(this))
+            .asCustom(SimpleLoadingDialog(this))
 
     }
 
@@ -120,42 +115,11 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(),
     }
 
     override fun dismissLoading() {
-        loadingDialog?.takeIf { it.isShow }?.dismiss()
+        loadingDialog?.takeIf { it.isShow }?.smartDismiss()
     }
 
     override fun showToast(msg: String) {
         ToastUtils.showLong(msg)
-    }
-
-    override fun showSuccessSnackBar(msg: String) {
-        Snackbar.make(binding.root, msg, Snackbar.LENGTH_LONG)
-            .show()
-    }
-
-    override fun showErrorSnackBar(msg: String) {
-        Snackbar.make(binding.root, msg, Snackbar.LENGTH_LONG)
-            .setTextColor(Color.parseColor("#E06C75"))
-            .show()
-    }
-
-    override fun loginAndFinish() {
-        Timber.i("activity跳到登录")
-        ARouter.getInstance().build("/login/LoginActivity")
-            .navigation(mContext, object : NavigationCallback {
-                override fun onFound(postcard: Postcard?) {
-                }
-
-                override fun onLost(postcard: Postcard?) {
-                }
-
-                override fun onArrival(postcard: Postcard?) {
-                    finish()
-                }
-
-                override fun onInterrupt(postcard: Postcard?) {
-                }
-
-            })
     }
 
 }

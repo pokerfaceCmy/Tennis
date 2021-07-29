@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
+        android:networkSecurityConfig="@xml/network_security_config"
         android:name=".Application"
         android:allowBackup="true"
         android:appComponentFactory="whateverString"
@@ -21,7 +22,7 @@
         android:theme="@style/Theme.Tennis"
         tools:replace="android:appComponentFactory"
         tools:targetApi="p">
-        <activity android:name=".domain.login.RetrievePswActivity"></activity>
+        <activity android:name=".domain.login.RetrievePswActivity"/>
         <activity android:name=".domain.login.PasswordLoginActivity" />
         <activity android:name=".domain.login.VerificationCodeActivity" />
         <activity android:name=".domain.login.SmsLoginActivity">
