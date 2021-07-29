@@ -6,26 +6,27 @@ package com.wetech.aus.tennis.app.domain
  * @Desc: TODO
  * @GitHub：https://github.com/pokerfaceCmy
  */
-class RoutePath {
-    companion object {
-        const val MainActivity = "/main/MainActivity"
+object RoutePath {
+    const val MainActivity = "/main/MainActivity"
 
-        object Login{
-            const val VerificationCodeActivity = "/login/VerificationCodeActivity"
-            const val PasswordLoginActivity = "/login/PasswordLoginActivity"
-            const val RetrievePswActivity = "/login/RetrievePswActivity"
-        }
-        object Home
+    object Login {
+        const val VerificationCodeActivity = "/login/VerificationCodeActivity"
+        const val PasswordLoginActivity = "/login/PasswordLoginActivity"
+        const val RetrievePswActivity = "/login/RetrievePswActivity"
+        const val PrefixActivity = "/login/PrefixActivity"
 
-        object Courts
+    }
 
-        object Booking
+    object Home
 
-        object Profile
+    object Courts
 
-        object Club{
-            const val ClubDetailActivity = "/club/ClubDetailActivity"
-            const val ClubBookingActivity = "/club/ClubBookingActivity"
-        }
+    object Booking
+
+    object Profile
+
+    object Club {
+        const val ClubDetailActivity = "/club/ClubDetailActivity"
+        const val ClubBookingActivity = "/club/ClubBookingActivity"
     }
 }

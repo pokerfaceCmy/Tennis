@@ -3,6 +3,7 @@ package com.wetech.aus.tennis.app.domain.login.vm
 import androidx.lifecycle.MutableLiveData
 import com.poker.common.base.BaseViewModel
 import com.poker.common.exception.BaseHttpException
+import com.wetech.aus.tennis.app.domain.login.repository.bean.PrefixResponse
 import com.wetech.aus.tennis.app.domain.login.repository.remote.LoginClient
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -17,8 +18,11 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val loginClient: LoginClient
 ) : BaseViewModel() {
+
     val sendSmsSuccessLD = MutableLiveData<Any>()
     val sendSmsFailedLD = MutableLiveData<BaseHttpException>()
+
+    val getPrefixLD = MutableLiveData<PrefixResponse?>()
 
     fun sendSms() {
         enqueue({ loginClient.sendSms() }) {
@@ -27,6 +31,14 @@ class LoginViewModel @Inject constructor(
             }
             onFailed {
                 sendSmsFailedLD.value = it
+            }
+        }
+    }
+
+    fun getCountryMobilePrefix() {
+        enqueue({ loginClient.getCountryMobilePrefix()}) {
+            onSuccess {
+                getPrefixLD.value = it
             }
         }
     }

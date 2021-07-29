@@ -15,7 +15,7 @@ data class DataWrapper<Data>(
     val extraMsg: String
 ) : IApiResult<Data> {
     override val isSuccess: Boolean
-        get() = code == 200
+        get() = code == 2000
     override val httpData: Data
         get() = data
     override val httpMsg: String

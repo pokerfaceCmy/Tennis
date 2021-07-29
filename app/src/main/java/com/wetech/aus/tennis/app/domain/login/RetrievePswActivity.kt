@@ -6,7 +6,7 @@ import com.wetech.aus.tennis.app.databinding.ActivityRetrievePswBinding
 import com.wetech.aus.tennis.app.domain.RoutePath
 import dagger.hilt.android.AndroidEntryPoint
 
-@Route(path = RoutePath.Companion.Login.RetrievePswActivity)
+@Route(path = RoutePath.Login.RetrievePswActivity)
 @AndroidEntryPoint
 class RetrievePswActivity : BaseActivity<ActivityRetrievePswBinding>() {
 

@@ -12,7 +12,7 @@ import com.wetech.aus.tennis.app.domain.club.adapter.CoachAdapter
 import com.wetech.aus.tennis.app.domain.club.adapter.FacilitiesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
-@Route(path = RoutePath.Companion.Club.ClubDetailActivity)
+@Route(path = RoutePath.Club.ClubDetailActivity)
 @AndroidEntryPoint
 class ClubDetailActivity : BaseActivity<ActivityClubDetailBinding>() {
     private val facilitiesAdapter by lazy {
@@ -46,7 +46,7 @@ class ClubDetailActivity : BaseActivity<ActivityClubDetailBinding>() {
 
             clBooking.setOnClickListener {
                 ARouter.getInstance()
-                    .build(RoutePath.Companion.Club.ClubBookingActivity)
+                    .build(RoutePath.Club.ClubBookingActivity)
                     .navigation()
             }
 

@@ -69,7 +69,7 @@ object NetWorkModule {
 
     @Provides
     @Singleton
-    fun provideMainService(retrofit: Retrofit): ApiService {
+    fun 吧(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
 }

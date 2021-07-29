@@ -10,7 +10,7 @@ import com.wetech.aus.tennis.app.domain.login.vm.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
-@Route(path = RoutePath.Companion.Login.VerificationCodeActivity)
+@Route(path = RoutePath.Login.VerificationCodeActivity)
 @AndroidEntryPoint
 class VerificationCodeActivity : BaseActivity<ActivityVerificationCodeBinding>() {
     private val viewModel by getViewModel(LoginViewModel::class.java) {

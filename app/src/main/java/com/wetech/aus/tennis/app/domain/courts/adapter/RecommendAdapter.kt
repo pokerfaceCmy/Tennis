@@ -17,7 +17,7 @@ class RecommendAdapter : BaseQuickAdapter<String,BaseViewHolder>(R.layout.item_c
 
         holder.itemView.setOnClickListener {
             ARouter.getInstance()
-                .build(RoutePath.Companion.Club.ClubDetailActivity)
+                .build(RoutePath.Club.ClubDetailActivity)
                 .navigation()
         }
     }

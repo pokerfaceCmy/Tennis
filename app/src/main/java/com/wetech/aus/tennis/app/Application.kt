@@ -38,7 +38,7 @@ class Application : Application() {
     private fun initLog() {
         val formatStrategy: FormatStrategy = PrettyFormatStrategy.newBuilder()
             .methodCount(1)
-            .methodOffset(6)        // (Optional) Hides internal method calls up to offset. Default 5
+            .methodOffset(5)        // (Optional) Hides internal method calls up to offset. Default 5
             .tag(AppUtils.getAppName()) // (Optional) Global tag for every log. Default PRETTY_LOGGER
             .build()
         Logger.addLogAdapter(AndroidLogAdapter(formatStrategy))
@@ -49,9 +49,10 @@ class Application : Application() {
                     Logger.log(priority, tag, message, t)
                 }
             })
-        } else {
-//            Timber.plant(FileTree())
         }
+//        else {
+//            Timber.plant(FileTree())
+//        }
     }
 
 }

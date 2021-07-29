@@ -13,4 +13,5 @@ class LoginClient @Inject constructor(
     private val apiService: ApiService
 ) {
     suspend fun sendSms() = apiService.sendSms()
+    suspend fun getCountryMobilePrefix() = apiService.getCountryMobilePrefix()
 }

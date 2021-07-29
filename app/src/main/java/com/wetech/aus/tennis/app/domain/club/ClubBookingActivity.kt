@@ -7,7 +7,7 @@ import com.wetech.aus.tennis.app.databinding.ActivityClubBookingBinding
 import com.wetech.aus.tennis.app.domain.RoutePath
 import dagger.hilt.android.AndroidEntryPoint
 
-@Route(path = RoutePath.Companion.Club.ClubBookingActivity)
+@Route(path = RoutePath.Club.ClubBookingActivity)
 @AndroidEntryPoint
 class ClubBookingActivity : BaseActivity<ActivityClubBookingBinding>() {
 

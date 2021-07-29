@@ -7,7 +7,7 @@ import com.wetech.aus.tennis.app.databinding.ActivityPasswordLoginBinding
 import com.wetech.aus.tennis.app.domain.RoutePath
 import dagger.hilt.android.AndroidEntryPoint
 
-@Route(path = RoutePath.Companion.Login.PasswordLoginActivity)
+@Route(path = RoutePath.Login.PasswordLoginActivity)
 @AndroidEntryPoint
 class PasswordLoginActivity : BaseActivity<ActivityPasswordLoginBinding>() {
     override fun init() {
@@ -22,7 +22,7 @@ class PasswordLoginActivity : BaseActivity<ActivityPasswordLoginBinding>() {
 
             tvForgotPsw.setOnClickListener {
                 ARouter.getInstance()
-                    .build(RoutePath.Companion.Login.RetrievePswActivity)
+                    .build(RoutePath.Login.RetrievePswActivity)
                     .navigation()
             }
 

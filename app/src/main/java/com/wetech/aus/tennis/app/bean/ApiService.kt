@@ -1,5 +1,6 @@
 package com.wetech.aus.tennis.app.bean
 
+import com.wetech.aus.tennis.app.domain.login.repository.bean.PrefixResponse
 import retrofit2.http.GET
 
 /**
@@ -14,4 +15,10 @@ interface ApiService {
      */
     @GET("/system/sendSms")
     suspend fun sendSms(): DataWrapper<Any>
+
+    /**
+     * 获取国家对应的区号
+     */
+    @GET("/system/getCountryMobilePrefix")
+    suspend fun getCountryMobilePrefix(): PrefixResponse?
 }
