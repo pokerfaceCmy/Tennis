@@ -2,7 +2,12 @@
 
 package com.poker.plugin
 
-// 统一管理项目中使用的依赖库
+/**
+ * @Author: pokerfaceCmy
+ * @Date: 2021/6/29 10:02
+ * @Desc: 统一管理项目依赖项
+ * @GitHub：https://github.com/pokerfaceCmy
+ */
 object Deps {
 
     const val androidGradlePlugin = "com.android.tools.build:gradle:4.2.2"
@@ -54,6 +59,12 @@ object Deps {
             const val ktx = "androidx.room:room-ktx:$version"
             const val runtime = "androidx.room:room-runtime:$version"
             const val roomCompiler = "androidx.room:room-compiler:$version"
+        }
+
+        object DataStore {
+            private const val version = "1.0.0-alpha01"
+
+            const val preferences = "androidx.datastore:datastore-preferences:$version"
         }
     }
 
@@ -120,7 +131,7 @@ object Deps {
     }
 
     object Image {
-        private const val version = "1.3.0"
+        private const val version = "1.3.1"
 
         /**
          * @see <a href="https://github.com/coil-kt/coil/blob/main/README-zh.md">

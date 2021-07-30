@@ -1,7 +1,12 @@
 package com.wetech.aus.tennis.app.bean
 
+import com.wetech.aus.tennis.app.domain.login.repository.bean.LoginRequest
+import com.wetech.aus.tennis.app.domain.login.repository.bean.LoginResponse
 import com.wetech.aus.tennis.app.domain.login.repository.bean.PrefixResponse
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Query
 
 /**
  * @Author: pokerfaceCmy
@@ -21,4 +26,23 @@ interface ApiService {
      */
     @GET("/system/getCountryMobilePrefix")
     suspend fun getCountryMobilePrefix(): PrefixResponse?
+
+    /**
+     * 校验是否存在此用户
+     * @param phone 手机号
+     * @param prefix 前缀
+     *
+     * @return Boolean 是否存在
+     */
+    @GET("/system/checkHasUser")
+    suspend fun checkHasUser(
+        @Query("phone") phone: String,
+        @Query("prefix") prefix: String
+    ): Boolean
+
+    /**
+     * 登录
+     */
+    @POST("/system/login")
+    suspend fun login(@Body loginRequest: LoginRequest) : LoginResponse?
 }

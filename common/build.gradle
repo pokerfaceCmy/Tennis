@@ -86,6 +86,8 @@ dependencies {
     implementation Deps.Jetpack.Hilt.hiltAndroid
     kapt Deps.Jetpack.Hilt.hiltAndroidCompiler
     kapt Deps.Jetpack.Hilt.hiltCompiler
+    //DataStore
+    api Deps.Jetpack.DataStore.preferences
     //Router
     implementation Deps.Router.arouterApi
     kapt Deps.Router.arouterCompiler

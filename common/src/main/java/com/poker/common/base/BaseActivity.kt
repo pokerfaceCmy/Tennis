@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
+import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.ToastUtils
 import com.leaf.library.StatusBarUtil
 import com.lxj.xpopup.XPopup
@@ -97,6 +98,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(),
         StatusBarUtil.setColor(this, Color.WHITE)
         StatusBarUtil.setDarkMode(this)
 
+        ARouter.getInstance().inject(this)
         init()
     }
 

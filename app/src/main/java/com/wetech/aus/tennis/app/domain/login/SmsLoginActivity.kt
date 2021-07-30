@@ -16,6 +16,8 @@ class SmsLoginActivity : BaseActivity<ActivitySmsLoginBinding>() {
             btnGetCode.setOnClickListener {
                 ARouter.getInstance()
                     .build(RoutePath.Login.VerificationCodeActivity)
+                    .withString("phone","18617131916")
+                    .withString("phonePrefix","86")
                     .navigation()
             }
             tvPasswordLogin.setOnClickListener {

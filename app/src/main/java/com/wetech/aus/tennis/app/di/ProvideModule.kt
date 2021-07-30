@@ -1,13 +1,20 @@
 package com.wetech.aus.tennis.app.di
 
+import android.content.Context
+import androidx.datastore.DataStore
+import androidx.datastore.preferences.Preferences
+import androidx.datastore.preferences.createDataStore
+import com.blankj.utilcode.util.AppUtils
 import com.google.gson.Gson
 import com.poker.common.converter.gson.RetroGsonConverterFactory
+import com.poker.common.interceptor.TokenInterceptor
 import com.wetech.aus.tennis.app.BuildConfig
 import com.wetech.aus.tennis.app.bean.ApiService
 import com.wetech.aus.tennis.app.bean.DataWrapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -42,9 +49,10 @@ object JsonModule {
 @Module
 @InstallIn(SingletonComponent::class)
 object NetWorkModule {
+
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(tokenInterceptor: TokenInterceptor): OkHttpClient {
         val logInterceptor = HttpLoggingInterceptor()
         logInterceptor.level = HttpLoggingInterceptor.Level.BODY
         val okHttpClient = OkHttpClient.Builder()
@@ -52,6 +60,7 @@ object NetWorkModule {
             .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
             .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
             .addNetworkInterceptor(logInterceptor)
+            .addInterceptor(tokenInterceptor)
             .retryOnConnectionFailure(true)
             .hostnameVerifier { _, _ -> true }
         return okHttpClient.build()
@@ -69,7 +78,7 @@ object NetWorkModule {
 
     @Provides
     @Singleton
-    fun 吧(retrofit: Retrofit): ApiService {
+    fun provideMainService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
 }

@@ -1,6 +1,7 @@
 package com.wetech.aus.tennis.app.domain.login.repository.remote
 
 import com.wetech.aus.tennis.app.bean.ApiService
+import com.wetech.aus.tennis.app.domain.login.repository.bean.LoginRequest
 import javax.inject.Inject
 
 /**
@@ -14,4 +15,6 @@ class LoginClient @Inject constructor(
 ) {
     suspend fun sendSms() = apiService.sendSms()
     suspend fun getCountryMobilePrefix() = apiService.getCountryMobilePrefix()
+    suspend fun checkHasUser(phone: String, prefix: String) = apiService.checkHasUser(phone, prefix)
+    suspend fun login(loginRequest: LoginRequest) = apiService.login(loginRequest)
 }
