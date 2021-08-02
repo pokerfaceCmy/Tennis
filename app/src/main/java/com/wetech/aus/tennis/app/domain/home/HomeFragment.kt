@@ -9,10 +9,12 @@ import com.wetech.aus.tennis.app.R
 import com.wetech.aus.tennis.app.databinding.FragmentHomeBinding
 import com.wetech.aus.tennis.app.domain.home.adapter.FavouriteAdapter
 import com.wetech.aus.tennis.app.domain.home.adapter.RecommendAdapter
+import com.wetech.aus.tennis.app.domain.home.vm.HomeViewModel
 import com.zhpan.bannerview.BannerViewPager
 import com.zhpan.bannerview.BaseBannerAdapter
 import com.zhpan.bannerview.BaseViewHolder
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 /**
  * @Author: pokerfaceCmy
@@ -30,24 +32,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         FavouriteAdapter()
     }
 
+    private val viewModel by getViewModel(HomeViewModel::class.java) {
+        bannerLD.observe(mLifecycleOwner, {
+            mViewPager.refreshData(
+                it?.list?.map { data -> data.imageUrl }
+            )
+        })
+    }
+
     override fun init() {
+        Timber.d("init")
+        viewModel.getBanner()
+
         binding.apply {
             toolBar.tvTitle.text = getString(R.string.hi_tennis)
             mViewPager = root.findViewById(R.id.banner)
+
             mViewPager.apply {
                 adapter = BannerAdapter()
                 setLifecycleRegistry(lifecycle)
             }.create()
-            mViewPager.refreshData(
-                mutableListOf(
-                    "https://images.uiiiuiii.com/wp-content/uploads/2021/05/i-banner-ww0511-1-02.jpg",
-                    "https://images.uiiiuiii.com/wp-content/uploads/2021/05/i-banner-ww0511-1-07.jpg",
-                    "https://images.uiiiuiii.com/wp-content/uploads/2021/05/i-banner-ww0511-1-04.jpg",
-                    "https://images.uiiiuiii.com/wp-content/uploads/2021/05/i-banner-ww0511-1-05.jpg",
-                    "https://images.uiiiuiii.com/wp-content/uploads/2021/05/i-banner-ww0511-1-06.jpg",
-                )
-            )
-            mViewPager.setLifecycleRegistry(lifecycle)
 
             rvRecommend.layoutManager =
                 LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)

@@ -1,5 +1,6 @@
 package com.wetech.aus.tennis.app.domain.login
 
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.poker.common.base.BaseActivity
 import com.wetech.aus.tennis.app.databinding.ActivitySmsLoginBinding
@@ -7,9 +8,9 @@ import com.wetech.aus.tennis.app.domain.RoutePath
 import com.wetech.aus.tennis.app.domain.login.vm.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+@Route(path = RoutePath.Login.SmsLoginActivity)
 @AndroidEntryPoint
 class SmsLoginActivity : BaseActivity<ActivitySmsLoginBinding>() {
-
 
     override fun init() {
         binding.apply {

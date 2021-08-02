@@ -28,7 +28,7 @@ class TokenInterceptor @Inject constructor(
         val token = data[preferencesKey<String>(name = TOKEN)] ?: ""
         val requestBuilder = original.newBuilder()
             .addHeader(
-                TOKEN,
+                "Authorization",
                 token
             )
         val request = requestBuilder.build()

@@ -111,6 +111,8 @@ dependencies {
     implementation Deps.Jetpack.Hilt.hiltAndroid
     kapt Deps.Jetpack.Hilt.hiltAndroidCompiler
     kapt Deps.Jetpack.Hilt.hiltCompiler
+    //DataBase
+    kapt Deps.Jetpack.Room.roomCompiler
     //二维码
     implementation Deps.Util.zxingLite
     //权限管理

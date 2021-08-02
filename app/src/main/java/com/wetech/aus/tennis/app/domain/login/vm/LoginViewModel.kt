@@ -6,11 +6,11 @@ import androidx.datastore.preferences.edit
 import androidx.datastore.preferences.preferencesKey
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
 import com.poker.common.base.BaseViewModel
 import com.poker.common.exception.BaseHttpException
 import com.poker.common.interceptor.TokenInterceptor.Companion.TOKEN
-import com.wetech.aus.tennis.app.domain.login.repository.bean.LoginRequest
-import com.wetech.aus.tennis.app.domain.login.repository.bean.PrefixResponse
+import com.wetech.aus.tennis.app.domain.login.repository.bean.*
 import com.wetech.aus.tennis.app.domain.login.repository.remote.LoginClient
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -28,12 +28,14 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val loginClient: LoginClient,
     private val dataStore: DataStore<Preferences>,
+    private val userInfoDao: UserInfoDao
 ) : BaseViewModel() {
 
     val sendSmsSuccessLD = MutableLiveData<Any>()
     val sendSmsFailedLD = MutableLiveData<BaseHttpException>()
     val getPrefixLD = MutableLiveData<PrefixResponse?>()
     val checkHasUserLD = MutableLiveData<Boolean>()
+    val loginLd = MutableLiveData<LoginResponse>()
 
     fun sendSms() {
         enqueue({ loginClient.sendSms() }) {
@@ -63,13 +65,19 @@ class LoginViewModel @Inject constructor(
     fun login(loginRequest: LoginRequest) {
         enqueue({ loginClient.login(loginRequest) }) {
             onSuccess { loginResponse ->
+                loginLd.value = loginResponse
+
                 viewModelScope.launch(Dispatchers.IO) {
                     saveToken(loginResponse?.token)
+                    saveUserInfo(loginResponse?.userInfo)
                 }
             }
         }
     }
 
+    /**
+     * 将token存入dataStore中
+     */
     private suspend fun saveToken(token: String?) {
         token?.let {
             dataStore.edit {
@@ -80,4 +88,14 @@ class LoginViewModel @Inject constructor(
             dataStore.data.first()
         }
     }
+
+    /**
+     * 将用户信息保存到数据库
+     */
+    private fun saveUserInfo(userinfo: UserInfo?) {
+        userinfo?.let {
+            userInfoDao.insert(userinfo)
+        }
+    }
+
 }

@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
-        android:name=".Application"
+        android:name=".app.Application"
         android:allowBackup="true"
         android:appComponentFactory="whateverString"
         android:icon="@mipmap/ic_launcher"
@@ -22,17 +22,18 @@
         android:theme="@style/Theme.Tennis"
         tools:replace="android:appComponentFactory"
         tools:targetApi="p">
-        <activity android:name=".domain.login.PrefixActivity"></activity>
-        <activity android:name=".domain.login.RetrievePswActivity" />
-        <activity android:name=".domain.login.PasswordLoginActivity" />
-        <activity android:name=".domain.login.VerificationCodeActivity" />
-        <activity android:name=".domain.login.SmsLoginActivity">
+        <activity android:name=".domain.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".domain.login.PrefixActivity" />
+        <activity android:name=".domain.login.RetrievePswActivity" />
+        <activity android:name=".domain.login.PasswordLoginActivity" />
+        <activity android:name=".domain.login.VerificationCodeActivity" />
+        <activity android:name=".domain.login.SmsLoginActivity" />
         <activity android:name=".domain.club.ClubBookingActivity" />
         <activity android:name=".domain.club.ClubDetailActivity" />
         <!--
@@ -47,10 +48,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".domain.MainActivity" />
+        <activity android:name=".domain.MainActivity"/>
         <activity
             android:name="com.king.zxing.CaptureActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/CaptureTheme" />
 
         <meta-data

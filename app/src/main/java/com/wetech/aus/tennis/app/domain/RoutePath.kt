@@ -10,6 +10,7 @@ object RoutePath {
     const val MainActivity = "/main/MainActivity"
 
     object Login {
+        const val SmsLoginActivity = "/login/SmsLoginActivity"
         const val VerificationCodeActivity = "/login/VerificationCodeActivity"
         const val PasswordLoginActivity = "/login/PasswordLoginActivity"
         const val RetrievePswActivity = "/login/RetrievePswActivity"

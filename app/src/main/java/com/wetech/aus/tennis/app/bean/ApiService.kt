@@ -1,5 +1,6 @@
 package com.wetech.aus.tennis.app.bean
 
+import com.wetech.aus.tennis.app.domain.home.repository.bean.BannerResponse
 import com.wetech.aus.tennis.app.domain.login.repository.bean.LoginRequest
 import com.wetech.aus.tennis.app.domain.login.repository.bean.LoginResponse
 import com.wetech.aus.tennis.app.domain.login.repository.bean.PrefixResponse
@@ -45,4 +46,9 @@ interface ApiService {
      */
     @POST("/system/login")
     suspend fun login(@Body loginRequest: LoginRequest) : LoginResponse?
+
+    /* --------------------------------- */
+    @GET("/image/queryPollingImage")
+    suspend fun getBanner() : BannerResponse?
+
 }

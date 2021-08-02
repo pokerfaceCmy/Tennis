@@ -8,13 +8,13 @@ package com.wetech.aus.tennis.app.domain.login.repository.bean
  */
 
 data class PrefixResponse(
-    val list: List<Data>
+    val list: List<Data>?
 ) {
     data class Data(
-        val area: String = "",
-        val code: String = "",
-        val id: Int = 0,
-        val name: String = ""
+        val area: String?,
+        val code: String?,
+        val id: Int?,
+        val name: String?
     )
 }
 

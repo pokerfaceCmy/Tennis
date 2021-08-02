@@ -1,8 +1,10 @@
 package com.wetech.aus.tennis.app.domain.login
 
+import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.blankj.utilcode.util.SPUtils
+import com.alibaba.android.arouter.facade.callback.NavigationCallback
+import com.alibaba.android.arouter.launcher.ARouter
 import com.poker.common.base.BaseActivity
 import com.poovam.pinedittextfield.PinField
 import com.wetech.aus.tennis.app.databinding.ActivityVerificationCodeBinding
@@ -24,6 +26,25 @@ class VerificationCodeActivity : BaseActivity<ActivityVerificationCodeBinding>()
     private val viewModel by getViewModel(LoginViewModel::class.java) {
         sendSmsFailedLD.observe(mLifecycleOwner, {
             Timber.e(it)
+        })
+
+        loginLd.observe(mLifecycleOwner, {
+            ARouter.getInstance()
+                .build(RoutePath.MainActivity)
+                .navigation(mContext, object : NavigationCallback {
+                    override fun onFound(postcard: Postcard?) {
+                    }
+
+                    override fun onLost(postcard: Postcard?) {
+                    }
+
+                    override fun onArrival(postcard: Postcard?) {
+                        finish()
+                    }
+
+                    override fun onInterrupt(postcard: Postcard?) {
+                    }
+                })
         })
     }
 

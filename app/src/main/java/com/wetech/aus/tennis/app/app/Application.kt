@@ -1,4 +1,4 @@
-package com.wetech.aus.tennis.app
+package com.wetech.aus.tennis.app.app
 
 import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
@@ -8,6 +8,7 @@ import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.FormatStrategy
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
+import com.wetech.aus.tennis.app.BuildConfig
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
