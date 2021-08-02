@@ -136,7 +136,7 @@
                 android:layout_height="22dp"
                 android:layout_marginHorizontal="11dp"
                 android:layout_marginTop="2dp"
-                android:progress="45"
+                android:progress="0"
                 android:progressDrawable="@drawable/bg_progressbar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

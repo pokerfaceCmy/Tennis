@@ -10,6 +10,7 @@ import com.google.gson.Gson
 import com.poker.common.base.BaseViewModel
 import com.poker.common.exception.BaseHttpException
 import com.poker.common.interceptor.TokenInterceptor.Companion.TOKEN
+import com.wetech.aus.tennis.app.bean.DataWrapper
 import com.wetech.aus.tennis.app.domain.login.repository.bean.*
 import com.wetech.aus.tennis.app.domain.login.repository.remote.LoginClient
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,7 +32,7 @@ class LoginViewModel @Inject constructor(
     private val userInfoDao: UserInfoDao
 ) : BaseViewModel() {
 
-    val sendSmsSuccessLD = MutableLiveData<Any>()
+    val sendSmsSuccessLD = MutableLiveData<DataWrapper<*>>()
     val sendSmsFailedLD = MutableLiveData<BaseHttpException>()
     val getPrefixLD = MutableLiveData<PrefixResponse?>()
     val checkHasUserLD = MutableLiveData<Boolean>()

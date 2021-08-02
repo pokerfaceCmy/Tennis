@@ -9,12 +9,12 @@ import com.wetech.aus.tennis.app.R
 import com.wetech.aus.tennis.app.databinding.FragmentHomeBinding
 import com.wetech.aus.tennis.app.domain.home.adapter.FavouriteAdapter
 import com.wetech.aus.tennis.app.domain.home.adapter.RecommendAdapter
+import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListRequest
 import com.wetech.aus.tennis.app.domain.home.vm.HomeViewModel
 import com.zhpan.bannerview.BannerViewPager
 import com.zhpan.bannerview.BaseBannerAdapter
 import com.zhpan.bannerview.BaseViewHolder
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 /**
  * @Author: pokerfaceCmy
@@ -38,11 +38,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 it?.list?.map { data -> data.imageUrl }
             )
         })
+
+        queryClubListLD.observe(mLifecycleOwner, {
+            recommendAdapter.setList(it?.list)
+        })
+
     }
 
     override fun init() {
-        Timber.d("init")
         viewModel.getBanner()
+
+        viewModel.queryClubList(
+            ClubListRequest(
+                pageNum = 1
+            )
+        )
 
         binding.apply {
             toolBar.tvTitle.text = getString(R.string.hi_tennis)
@@ -58,8 +68,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             rvRecommend.adapter = recommendAdapter
             val pagerSnapHelper = PagerSnapHelper()
             pagerSnapHelper.attachToRecyclerView(rvRecommend)
-            recommendAdapter.setList(mutableListOf("", "", "", ""))
 
+            recommendAdapter.addChildClickViewIds(R.id.ivLike)
+
+            recommendAdapter.setOnItemChildClickListener { _, view, position ->
+                when (view.id) {
+                    R.id.ivLike -> {
+                        val data = recommendAdapter.data[position]
+                        val newData = data?.copy(
+                            enjoy = if (data.enjoy == 1) 2 else 1
+                        )
+                        val enjoy = data?.enjoy
+                        viewModel.likeClub(data?.id, if (enjoy == 1) "2" else "1")
+
+                        viewModel.likeClubLD.observe(mLifecycleOwner, {
+                            recommendAdapter.setData(position, newData)
+                        })
+                    }
+                }
+            }
 
             rvFavourites.layoutManager =
                 LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)

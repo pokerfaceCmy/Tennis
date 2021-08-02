@@ -1,6 +1,7 @@
 package com.wetech.aus.tennis.app.domain.home.repository
 
 import com.wetech.aus.tennis.app.bean.ApiService
+import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListRequest
 import javax.inject.Inject
 
 /**
@@ -12,5 +13,11 @@ import javax.inject.Inject
 class HomeClient @Inject constructor(
     private val apiService: ApiService
 ) {
-    suspend fun getBanner() =apiService.getBanner()
+
+    suspend fun getBanner() = apiService.getBanner()
+
+    suspend fun queryClubList(clubListRequest: ClubListRequest) =
+        apiService.queryClubList(clubListRequest)
+
+    suspend fun likeClub(clubId: Long, type: String) = apiService.likeClub(clubId, type)
 }

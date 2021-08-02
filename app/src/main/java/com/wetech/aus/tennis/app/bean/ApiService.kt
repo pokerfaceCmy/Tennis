@@ -1,6 +1,8 @@
 package com.wetech.aus.tennis.app.bean
 
 import com.wetech.aus.tennis.app.domain.home.repository.bean.BannerResponse
+import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListRequest
+import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListResponse
 import com.wetech.aus.tennis.app.domain.login.repository.bean.LoginRequest
 import com.wetech.aus.tennis.app.domain.login.repository.bean.LoginResponse
 import com.wetech.aus.tennis.app.domain.login.repository.bean.PrefixResponse
@@ -20,7 +22,7 @@ interface ApiService {
      * 发送验证码
      */
     @GET("/system/sendSms")
-    suspend fun sendSms(): DataWrapper<Any>
+    suspend fun sendSms(): DataWrapper<*>
 
     /**
      * 获取国家对应的区号
@@ -45,10 +47,30 @@ interface ApiService {
      * 登录
      */
     @POST("/system/login")
-    suspend fun login(@Body loginRequest: LoginRequest) : LoginResponse?
+    suspend fun login(@Body loginRequest: LoginRequest): LoginResponse?
 
     /* --------------------------------- */
-    @GET("/image/queryPollingImage")
-    suspend fun getBanner() : BannerResponse?
 
+    /**
+     * 轮播图
+     */
+    @GET("/image/queryPollingImage")
+    suspend fun getBanner(): BannerResponse?
+
+    /**
+     * 俱乐部列表
+     */
+    @POST("/club/queryClubList")
+    suspend fun queryClubList(@Body clubListRequest: ClubListRequest): ClubListResponse?
+
+    /**
+     * 喜欢&取消喜欢 俱乐部
+     * @param clubId 俱乐部Id
+     * @param type 1，喜欢，2取消喜欢
+     */
+    @GET("/club/enjoyClub")
+    suspend fun likeClub(
+        @Query("clubId") clubId: Long,
+        @Query("type") type: String
+    ): DataWrapper<*>
 }
