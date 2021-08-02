@@ -15,7 +15,7 @@ interface IApiResult<Data> {
     /**
      * 返回的数据
      */
-    val httpData: Data
+    val httpData: Data?
 
     /**
      * 返回的msg

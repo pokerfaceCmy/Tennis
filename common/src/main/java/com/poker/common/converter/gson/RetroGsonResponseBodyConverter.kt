@@ -30,6 +30,7 @@ class RetroGsonResponseBodyConverter<T, ApiResultType : IApiResult<*>> construct
             if (!apiResult.isSuccess) throw ServerException(apiResult.httpCode, apiResult.httpMsg)
             if (type == apiClass) return apiResult as T
             if (apiResult.dataField.isEmpty()) return gson.fromJson(response, type)
+            if (apiResult.httpData == null) return apiResult as T
             return gson.fromJson(
                 (JsonParser().parse(response) as JsonObject).get(apiResult.dataField),
                 type
