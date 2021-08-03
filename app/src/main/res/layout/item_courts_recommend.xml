@@ -51,10 +51,10 @@
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:src="@drawable/ic_launcher_background"
-            app:incline="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:position="top"
-            tools:layout_editor_absoluteY="0dp" />
+            app:imgBottom="100dp"
+            app:imgTop="130dp"
+            app:layout_constraintEnd_toEndOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

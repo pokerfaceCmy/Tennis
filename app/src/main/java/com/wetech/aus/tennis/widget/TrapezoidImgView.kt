@@ -4,10 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.ShapeDrawable
-import android.graphics.drawable.shapes.PathShape
 import android.util.AttributeSet
-import android.widget.LinearLayout
 import androidx.annotation.AttrRes
 import androidx.appcompat.widget.AppCompatImageView
 import com.wetech.aus.tennis.app.R
@@ -28,13 +25,10 @@ class TrapezoidImgView : AppCompatImageView {
     private var mShader: BitmapShader? = null
     private var mBitmap: Bitmap? = null
     private var mMatrix: Matrix? = null
-    private var mPosition: Int = 0
-    private var incline: Int = 0
 
+    private var imgTop: Int = 0
+    private var imgBottom: Int = 0
 
-    private val TYPE_TOP = 0
-    private val TYPE_MIDDLE = 1
-    private val TYPE_BOTTOM = 2
 
     constructor(context: Context) : super(context) {
         init(null, 0)
@@ -44,7 +38,11 @@ class TrapezoidImgView : AppCompatImageView {
         init(attrs, 0)
     }
 
-    constructor(context: Context, attrs: AttributeSet?, @AttrRes defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?, @AttrRes defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
         init(attrs, defStyleAttr)
     }
 
@@ -53,9 +51,15 @@ class TrapezoidImgView : AppCompatImageView {
         mPaint.style = Paint.Style.FILL
         mDrawable = drawable
 
-        val array = context.theme.obtainStyledAttributes(attrs, R.styleable.TrapezoidImageView, defStyleAttr, 0)
-        mPosition = array.getInt(R.styleable.TrapezoidImageView_position, 0)
-        incline = array.getDimensionPixelSize(R.styleable.TrapezoidImageView_incline, 0)
+        val array = context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.TrapezoidImageView,
+            defStyleAttr,
+            0
+        )
+
+        imgTop = array.getDimensionPixelSize(R.styleable.TrapezoidImageView_imgTop, 0)
+        imgBottom = array.getDimensionPixelSize(R.styleable.TrapezoidImageView_imgBottom, 0)
         array.recycle()
     }
 
@@ -69,81 +73,34 @@ class TrapezoidImgView : AppCompatImageView {
         if (mDrawable == null) return
         else {
             initBitmapShader()
-            when (mPosition) {
-                TYPE_TOP -> canvasTop(canvas!!)
-                TYPE_MIDDLE -> {
-                    canvasMiddle(canvas!!)
-//                canvas?.let { canvasMiddle(it) }
-                    setMargin()
-                }
-                TYPE_BOTTOM -> {
-                    canvasBottom(canvas!!)
-//                canvas?.let { canvasBottom(it) }
-                    setMargin()
-                }
-            }
+            canvasTrapezoid(canvas!!)
         }
-    }
-
-    private fun setMargin() {
-        val params = LinearLayout.LayoutParams(measuredWidth, measuredHeight)
-        params.setMargins(0, -incline / 6 * 5, 0, 0)
-        layoutParams = params
-        requestLayout()
     }
 
     private fun initBitmapShader() {
         mShader = BitmapShader(getSrcBitmap(), Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
-        val scale = Math.max(width * 1.0f / getSrcBitmap().width, height * 1.0f / getSrcBitmap().height)
+        val scale =
+            (width * 1.0f / getSrcBitmap().width).coerceAtLeast(height * 1.0f / getSrcBitmap().height)
         mMatrix = Matrix()
         mMatrix?.setScale(scale, scale)
         mShader?.setLocalMatrix(mMatrix)
         mPaint.shader = mShader
     }
 
-    private fun canvasTop(canvas: Canvas) {
-        canvas.drawPath(getTopPath(), mPaint)
+    private fun canvasTrapezoid(canvas: Canvas) {
+        canvas.drawPath(trapezoidPath(), mPaint)
     }
 
-    private fun canvasMiddle(canvas: Canvas) {
-        canvas.drawPath(getMiddlePath(), mPaint)
+    private fun trapezoidPath(): Path {
+        val path = Path()
+        path.moveTo(0F, 0F)
+        path.lineTo(imgTop.toFloat(), 0F)
+        path.lineTo(imgTop.toFloat(), mHeight.toFloat())
+        path.lineTo(imgTop.toFloat() - imgBottom.toFloat(), mHeight.toFloat())
+        path.close()
+        return path
     }
 
-    private fun canvasBottom(canvas: Canvas) {
-        canvas.drawPath(getBottomPath(), mPaint)
-    }
-
-    private fun getTopPath(): Path {
-        val topPath = Path()
-        topPath.moveTo(0F, 0F)
-        topPath.lineTo(mWidth.toFloat(), 0F)
-        topPath.lineTo(mWidth.toFloat(), mHeight.toFloat())
-        topPath.lineTo(0F, (mHeight - incline).toFloat())
-        topPath.close()
-        return topPath
-    }
-
-    private fun getMiddlePath(): Path {
-        val topPath = Path()
-        topPath.moveTo(0F, 0f)
-        topPath.lineTo(mWidth.toFloat(), incline.toFloat())
-        topPath.lineTo(mWidth.toFloat(), (mHeight - incline).toFloat())
-        topPath.lineTo(0F, mHeight.toFloat())
-        topPath.close()
-
-        return topPath
-    }
-
-    private fun getBottomPath(): Path {
-        val topPath = Path()
-        topPath.moveTo(0F, incline.toFloat())
-        topPath.lineTo(mWidth.toFloat(), 0F)
-        topPath.lineTo(mWidth.toFloat(), mHeight.toFloat())
-        topPath.lineTo(0F, mHeight.toFloat())
-        topPath.close()
-        return topPath
-
-    }
 
     private fun getSrcBitmap(): Bitmap {
         if (mDrawable is BitmapDrawable) {
@@ -152,15 +109,19 @@ class TrapezoidImgView : AppCompatImageView {
         val bitmapWidth = mDrawable?.intrinsicWidth
         val bitmapHeight = mDrawable?.intrinsicHeight
 
-        mBitmap = bitmapWidth?.let { bitmapHeight?.let { it1 -> Bitmap.createBitmap(it, it1, Bitmap.Config.ARGB_8888) } }
+        mBitmap = bitmapWidth?.let {
+            bitmapHeight?.let { it1 ->
+                Bitmap.createBitmap(
+                    it,
+                    it1,
+                    Bitmap.Config.ARGB_8888
+                )
+            }
+        }
         val canvasBitmap = mBitmap?.let { Canvas(it) }
         bitmapWidth?.let { bitmapHeight?.let { it1 -> mDrawable?.setBounds(0, 0, it, it1) } }
         canvasBitmap?.let { mDrawable?.draw(it) }
         return mBitmap as Bitmap
     }
 
-
-    fun setDrawable(drawable: Drawable) {
-        mDrawable = drawable
-    }
 }
