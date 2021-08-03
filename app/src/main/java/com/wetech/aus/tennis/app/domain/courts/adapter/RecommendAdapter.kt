@@ -1,5 +1,6 @@
 package com.wetech.aus.tennis.app.domain.courts.adapter
 
+import android.graphics.Canvas
 import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
@@ -20,5 +21,6 @@ class RecommendAdapter : BaseQuickAdapter<String,BaseViewHolder>(R.layout.item_c
                 .build(RoutePath.Club.ClubDetailActivity)
                 .navigation()
         }
+        val canvas = Canvas()
     }
 }

@@ -32,7 +32,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment(), IUIActionEventObserv
     override val lifecycleSupportedScope: CoroutineScope
         get() = lifecycleScope
 
-    override val mContext: Context?
+    override val mContext: Context
         get() = requireActivity()
 
     override val mLifecycleOwner: LifecycleOwner

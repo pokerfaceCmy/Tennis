@@ -16,7 +16,7 @@ data class BannerResponse(
 
 data class ClubListRequest(
     val pageNum: Int,
-    val pageSize: Int = 10
+    val pageSize: Int = 10,
 )
 
 data class ClubListResponse(

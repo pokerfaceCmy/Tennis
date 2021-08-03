@@ -17,9 +17,4 @@
         <item name="textAllCaps">false</item>
     </style>
 
-    <style name="trapezoidal">
-        <item name="cornerFamilyBottomLeft">cut</item>
-        <item name="cornerSizeBottomLeft">50dp</item>
-    </style>
-
 </resources>

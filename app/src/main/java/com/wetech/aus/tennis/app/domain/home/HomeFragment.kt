@@ -4,9 +4,12 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import coil.load
+import com.alibaba.android.arouter.launcher.ARouter
 import com.poker.common.base.BaseFragment
 import com.wetech.aus.tennis.app.R
 import com.wetech.aus.tennis.app.databinding.FragmentHomeBinding
+import com.wetech.aus.tennis.app.domain.RoutePath
+import com.wetech.aus.tennis.app.domain.club.ClubDetailActivity.Companion.CLUB_DETAIL
 import com.wetech.aus.tennis.app.domain.home.adapter.FavouriteAdapter
 import com.wetech.aus.tennis.app.domain.home.adapter.RecommendAdapter
 import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListRequest
@@ -70,7 +73,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             pagerSnapHelper.attachToRecyclerView(rvRecommend)
 
             recommendAdapter.addChildClickViewIds(R.id.ivLike)
-
+            recommendAdapter.setOnItemClickListener { adapter, _, position ->
+                ARouter.getInstance()
+                    .build(RoutePath.Club.ClubDetailActivity)
+                    .withObject(CLUB_DETAIL, adapter.data[position])
+                    .navigation()
+            }
             recommendAdapter.setOnItemChildClickListener { _, view, position ->
                 when (view.id) {
                     R.id.ivLike -> {
@@ -93,6 +101,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             rvFavourites.adapter = favouriteAdapter
             val pagerSnapHelper1 = PagerSnapHelper()
             pagerSnapHelper1.attachToRecyclerView(rvFavourites)
+
             favouriteAdapter.setList(mutableListOf("", "", "", ""))
         }
     }

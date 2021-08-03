@@ -2,45 +2,43 @@ package com.wetech.aus.tennis.app.domain.courts.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.jeremyliao.liveeventbus.LiveEventBus
+import com.permissionx.guolindev.PermissionX
 import com.poker.common.base.BaseFragment
 import com.wetech.aus.tennis.app.R
 import com.wetech.aus.tennis.app.databinding.FragmentMapsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import permissions.dispatcher.ktx.PermissionsRequester
-import permissions.dispatcher.ktx.constructPermissionsRequest
 import timber.log.Timber
 
 @AndroidEntryPoint
 class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
-    private lateinit var map: GoogleMap
     private lateinit var mMapView: MapView
+    private lateinit var mMap: GoogleMap
 
-    private val fusedLocationClient by lazy {
-        LocationServices.getFusedLocationProviderClient(activity as Activity)
-    }
-
-    private lateinit var permissionsRequester: PermissionsRequester
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        permissionsRequester = constructPermissionsRequest(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            requiresPermission = ::getMyLocation
-        )
-    }
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     companion object {
         const val MAP_FRAGMENT_RESUME = "MapsFragmentResume"
+    }
+
+    @SuppressLint("MissingPermission")
+    override fun init() {
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext)
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener {
+                mMap.addMarker(
+                    MarkerOptions().position(LatLng(it.latitude, it.longitude))
+                )
+            }
     }
 
     override fun onCreateView(
@@ -53,9 +51,7 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
         mMapView.onCreate(savedInstanceState)
         mMapView.onResume()
         try {
-            mContext?.let {
-                MapsInitializer.initialize(it)
-            }
+            MapsInitializer.initialize(mContext)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -63,41 +59,63 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
         return rootView
     }
 
+    override fun onMapReady(googleMap: GoogleMap) {
+        Timber.d("onMapReady")
+        mMap = googleMap
+    }
 
     override fun onResume() {
         super.onResume()
         LiveEventBus.get(MAP_FRAGMENT_RESUME, Int::class.java).post(0)
+        startLocationUpdates()
     }
+
+    private fun startLocationUpdates() {
+        PermissionX.init(this)
+            .permissions(Manifest.permission.ACCESS_FINE_LOCATION)
+            .request { allGranted, _, _ ->
+                if (allGranted) {
+                    getLocation()
+                }
+            }
+
+    }
+
 
     override fun onPause() {
         super.onPause()
         LiveEventBus.get(MAP_FRAGMENT_RESUME, Int::class.java).post(1)
     }
 
-    override fun init() {
 
-    }
-
-    @SuppressLint("MissingPermission")
-    private fun getMyLocation() {
-        Timber.i("enableMyLocation")
-        if (!::map.isInitialized) return
-        map.isMyLocationEnabled = true
-        map.uiSettings.isMyLocationButtonEnabled = true
-        //地图中心位置移动到定位位置，并设置地图缩放等级15
-        fusedLocationClient.lastLocation.addOnSuccessListener {
-            it?.let {
-                val latLng = LatLng(it.latitude, it.longitude)
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-
-            }
+    private fun createLocationRequest(): LocationRequest {
+        return LocationRequest.create().apply {
+            interval = 10000
+            fastestInterval = 5000
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        map = googleMap
-        map.setMinZoomPreference(15f)
-//        permissionsRequester.launch()
+    @SuppressLint("MissingPermission")
+    fun getLocation() {
+        fusedLocationClient.requestLocationUpdates(
+            createLocationRequest(),
+            object : LocationCallback() {
+                override fun onLocationResult(locationResult: LocationResult?) {
+                    locationResult ?: return
+                    for (location in locationResult.locations) {
+                        mMap.moveCamera(
+                            CameraUpdateFactory.newLatLngZoom(
+                                LatLng(
+                                    location.latitude,
+                                    location.longitude
+                                ), 13F
+                            )
+                        )
+                    }
+                }
+            },
+            Looper.getMainLooper()
+        )
     }
-
 }

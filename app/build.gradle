@@ -119,6 +119,8 @@ dependencies {
     implementation Deps.Permissions.permissionsdispatcher
     implementation Deps.Permissions.ktx
     kapt Deps.Permissions.processor
+    //https://github.com/guolindev/PermissionX
+    implementation 'com.guolindev.permissionx:permissionx:1.5.0'
     //评分
     implementation 'com.github.wsj1024:AndRatingBar:1.0.6'
     //banner
