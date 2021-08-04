@@ -1,11 +1,11 @@
 package com.wetech.aus.tennis.app.domain.courts.adapter
 
-import android.graphics.Canvas
-import com.alibaba.android.arouter.launcher.ARouter
+import coil.load
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.wetech.aus.tennis.app.R
-import com.wetech.aus.tennis.app.domain.RoutePath
+import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListResponse
+import com.wetech.aus.tennis.widget.TrapezoidImgView
 
 /**
  * @Author: pokerfaceCmy
@@ -13,14 +13,15 @@ import com.wetech.aus.tennis.app.domain.RoutePath
  * @Desc: TODO
  * @GitHub：https://github.com/pokerfaceCmy
  */
-class RecommendAdapter : BaseQuickAdapter<String,BaseViewHolder>(R.layout.item_courts_recommend) {
-    override fun convert(holder: BaseViewHolder, item: String) {
+class RecommendAdapter :
+    BaseQuickAdapter<ClubListResponse.Data, BaseViewHolder>(R.layout.item_courts_recommend) {
 
-        holder.itemView.setOnClickListener {
-            ARouter.getInstance()
-                .build(RoutePath.Club.ClubDetailActivity)
-                .navigation()
-        }
-        val canvas = Canvas()
+    override fun convert(holder: BaseViewHolder, item: ClubListResponse.Data) {
+        holder.setText(R.id.tvName, item.name)
+        holder.setText(R.id.tvBriefIntroduction, item.clubDesc)
+        holder.setText(R.id.tvPhone, item.tel)
+
+        val img = holder.getView<TrapezoidImgView>(R.id.img)
+        img.load(item.cover)
     }
 }

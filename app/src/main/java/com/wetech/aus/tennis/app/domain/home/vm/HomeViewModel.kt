@@ -21,7 +21,8 @@ class HomeViewModel @Inject constructor(
     private val homeClient: HomeClient
 ) : BaseViewModel() {
     val bannerLD = MutableLiveData<BannerResponse?>()
-    val queryClubListLD = MutableLiveData<ClubListResponse?>()
+    val queryRecommendClubListLD = MutableLiveData<ClubListResponse?>()
+    val queryFavouritesClubListLD = MutableLiveData<ClubListResponse?>()
     val likeClubLD = MutableLiveData<DataWrapper<*>?>()
 
     fun getBanner() {
@@ -32,10 +33,18 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun queryClubList(clubListRequest: ClubListRequest) {
+    fun queryRecommendClubList(clubListRequest: ClubListRequest) {
         enqueue({ homeClient.queryClubList(clubListRequest) }) {
             onSuccess {
-                queryClubListLD.value = it
+                queryRecommendClubListLD.value = it
+            }
+        }
+    }
+
+    fun queryFavouritesClubList(clubListRequest: ClubListRequest) {
+        enqueue({ homeClient.queryClubList(clubListRequest) }) {
+            onSuccess {
+                queryFavouritesClubListLD.value = it
             }
         }
     }

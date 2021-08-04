@@ -8,11 +8,12 @@ import android.util.AttributeSet
 import androidx.annotation.AttrRes
 import androidx.appcompat.widget.AppCompatImageView
 import com.wetech.aus.tennis.app.R
+import timber.log.Timber
 
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/7/28 10:34
- * @Desc: TODO
+ * @Desc:
  * @GitHub：https://github.com/pokerfaceCmy
  */
 class TrapezoidImgView : AppCompatImageView {
@@ -124,4 +125,8 @@ class TrapezoidImgView : AppCompatImageView {
         return mBitmap as Bitmap
     }
 
+    override fun setImageDrawable(drawable: Drawable?) {
+        super.setImageDrawable(drawable)
+        mDrawable = drawable
+    }
 }

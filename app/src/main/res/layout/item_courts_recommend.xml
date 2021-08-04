@@ -48,9 +48,9 @@
             tools:text="Tel：100 2233 667" />
 
         <com.wetech.aus.tennis.widget.TrapezoidImgView
+            android:id="@+id/img"
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_launcher_background"
             app:imgBottom="100dp"
             app:imgTop="130dp"
             app:layout_constraintEnd_toEndOf="parent" />

@@ -35,9 +35,11 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext)
         fusedLocationClient.lastLocation
             .addOnSuccessListener {
-                mMap.addMarker(
-                    MarkerOptions().position(LatLng(it.latitude, it.longitude))
-                )
+                it?.let {
+                    mMap.addMarker(
+                        MarkerOptions().position(LatLng(it.latitude, it.longitude))
+                    )
+                }
             }
     }
 

@@ -42,18 +42,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             )
         })
 
-        queryClubListLD.observe(mLifecycleOwner, {
+        queryRecommendClubListLD.observe(mLifecycleOwner, {
             recommendAdapter.setList(it?.list)
         })
-
+        queryFavouritesClubListLD.observe(mLifecycleOwner, {
+            favouriteAdapter.setList(it?.list)
+        })
     }
 
     override fun init() {
         viewModel.getBanner()
 
-        viewModel.queryClubList(
+        viewModel.queryRecommendClubList(
             ClubListRequest(
                 pageNum = 1
+            )
+        )
+        viewModel.queryFavouritesClubList(
+            ClubListRequest(
+                pageNum = 1,
+                enjoy = 1
             )
         )
 
@@ -102,7 +110,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             val pagerSnapHelper1 = PagerSnapHelper()
             pagerSnapHelper1.attachToRecyclerView(rvFavourites)
 
-            favouriteAdapter.setList(mutableListOf("", "", "", ""))
         }
     }
 
