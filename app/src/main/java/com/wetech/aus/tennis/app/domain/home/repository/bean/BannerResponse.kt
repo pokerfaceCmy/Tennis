@@ -21,6 +21,7 @@ data class ClubListRequest(
 )
 
 data class ClubListResponse(
+    val pageNum: Int?,
     val list: List<Data>?
 ) {
     data class Data(

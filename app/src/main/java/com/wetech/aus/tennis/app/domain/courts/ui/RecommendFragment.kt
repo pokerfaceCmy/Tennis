@@ -2,6 +2,8 @@ package com.wetech.aus.tennis.app.domain.courts.ui
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.poker.common.base.BaseFragment
+import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.wetech.aus.tennis.app.databinding.FragmentRecommendBinding
 import com.wetech.aus.tennis.app.domain.courts.adapter.RecommendAdapter
 import com.wetech.aus.tennis.app.domain.courts.vm.CourtsViewModel
@@ -16,9 +18,17 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 @AndroidEntryPoint
 class RecommendFragment : BaseFragment<FragmentRecommendBinding>() {
+    private var pageNum = 1
     private val viewModel by getViewModel(CourtsViewModel::class.java) {
         queryRecommendClubListLD.observe(mLifecycleOwner, {
-            recommendAdapter.setList(it?.list)
+            if (pageNum == 1) {
+                binding.refreshLayout.finishRefresh()
+                recommendAdapter.setList(it?.list)
+            } else {
+                binding.refreshLayout.finishLoadMore()
+                it?.list?.let { it1 -> recommendAdapter.addData(it1) }
+            }
+
         })
     }
     private val recommendAdapter by lazy {
@@ -29,13 +39,34 @@ class RecommendFragment : BaseFragment<FragmentRecommendBinding>() {
         binding.apply {
             viewModel.queryRecommendClubList(
                 ClubListRequest(
-                    pageNum = 1,
+                    pageNum = pageNum,
                     pageSize = 10
                 )
             )
             recyclerView.layoutManager = LinearLayoutManager(mContext)
             recyclerView.adapter = recommendAdapter
 
+            refreshLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
+                override fun onRefresh(refreshLayout: RefreshLayout) {
+                    pageNum = 1
+                    viewModel.queryRecommendClubList(
+                        ClubListRequest(
+                            pageNum = pageNum,
+                            pageSize = 10
+                        )
+                    )
+                }
+
+                override fun onLoadMore(refreshLayout: RefreshLayout) {
+                    pageNum += 1
+                    viewModel.queryRecommendClubList(
+                        ClubListRequest(
+                            pageNum = pageNum,
+                            pageSize = 10
+                        )
+                    )
+                }
+            })
         }
     }
 }

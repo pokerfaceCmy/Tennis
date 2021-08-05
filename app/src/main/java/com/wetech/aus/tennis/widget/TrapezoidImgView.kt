@@ -8,7 +8,6 @@ import android.util.AttributeSet
 import androidx.annotation.AttrRes
 import androidx.appcompat.widget.AppCompatImageView
 import com.wetech.aus.tennis.app.R
-import timber.log.Timber
 
 /**
  * @Author: pokerfaceCmy

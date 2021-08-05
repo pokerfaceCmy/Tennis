@@ -21,7 +21,7 @@ class CourtsViewModel @Inject constructor(
     val queryRecommendClubListLD = MutableLiveData<ClubListResponse?>()
 
     fun queryRecommendClubList(clubListRequest: ClubListRequest) {
-        enqueue({ homeClient.queryClubList(clubListRequest) }) {
+        enqueue({ homeClient.queryClubList(clubListRequest) }, showLoading = false) {
             onSuccess {
                 queryRecommendClubListLD.value = it
             }
