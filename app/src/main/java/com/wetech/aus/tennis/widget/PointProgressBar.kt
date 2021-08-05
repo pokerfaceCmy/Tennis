@@ -39,6 +39,7 @@ class PointProgressBar @JvmOverloads constructor(
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         mWidth = measuredWidth - paddingLeft - paddingRight
     }
+
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         canvas?.apply {

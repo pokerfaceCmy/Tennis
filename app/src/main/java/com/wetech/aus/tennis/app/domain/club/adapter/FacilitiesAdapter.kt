@@ -12,10 +12,11 @@ import com.wetech.aus.tennis.app.R
  * @Desc: TODO
  * @GitHub：https://github.com/pokerfaceCmy
  */
-class FacilitiesAdapter : BaseQuickAdapter<String,BaseViewHolder>(R.layout.item_club_facilities) {
+class FacilitiesAdapter : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_club_facilities) {
     override fun convert(holder: BaseViewHolder, item: String) {
-        holder.setText(R.id.tvFacilities,"Car park")
+        holder.setText(R.id.tvFacilities, "Car park")
 
-        holder.getView<ShapeableImageView>(R.id.img).load("https://www.stripeuk.com/wp-content/uploads/2018/11/shutterstock_540175210-BW.jpg")
+        holder.getView<ShapeableImageView>(R.id.img)
+            .load("https://www.stripeuk.com/wp-content/uploads/2018/11/shutterstock_540175210-BW.jpg")
     }
 }

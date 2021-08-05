@@ -1,4 +1,5 @@
-import com.poker.plugin.*
+import com.poker.plugin.BuildConfig
+import com.poker.plugin.Deps
 
 plugins {
     id 'com.poker.plugin'

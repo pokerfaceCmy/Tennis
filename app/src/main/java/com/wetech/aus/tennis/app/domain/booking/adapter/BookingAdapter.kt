@@ -17,7 +17,7 @@ class BookingAdapter : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_bo
         val ivClub = holder.getView<ShapeableImageView>(R.id.ivClub)
         ivClub.load("https://img95.699pic.com/xsj/0q/p7/1c.jpg!/fh/300")
 
-        holder.setText(R.id.tvName,"Tennis Club Tennis Club Tennis Club Tennis Club")
+        holder.setText(R.id.tvName, "Tennis Club Tennis Club Tennis Club Tennis Club")
 
     }
 }

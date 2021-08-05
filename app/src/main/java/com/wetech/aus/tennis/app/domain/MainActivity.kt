@@ -47,7 +47,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 RecyclerView.OVER_SCROLL_NEVER
 
             //点击底部导航栏时 控制ViewPager的变化
-                bottomNav.setOnNavigationItemSelectedListener {
+            bottomNav.setOnNavigationItemSelectedListener {
                 when (it.itemId) {
                     R.id.menu_home -> viewPage.setCurrentItem(0, true)
                     R.id.menu_courts -> viewPage.setCurrentItem(1, true)

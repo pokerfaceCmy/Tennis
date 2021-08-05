@@ -6,8 +6,10 @@ package com.poker.common.callback
  * @Desc: TODO
  * @GitHub：https://github.com/pokerfaceCmy
  */
-class RequestCallback<Data>(internal var onSuccess: ((Data?) -> Unit)? = null,
-                            internal var onSuccessIO: (suspend (Data?) -> Unit)? = null) : BaseRequestCallback() {
+class RequestCallback<Data>(
+    internal var onSuccess: ((Data?) -> Unit)? = null,
+    internal var onSuccessIO: (suspend (Data?) -> Unit)? = null
+) : BaseRequestCallback() {
 
     /**
      * 当网络请求成功时会调用此方法，随后会先后调用 onSuccessIO、onFinally 方法

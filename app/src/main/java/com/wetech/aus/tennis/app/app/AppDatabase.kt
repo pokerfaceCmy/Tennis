@@ -20,5 +20,5 @@ import com.wetech.aus.tennis.app.domain.login.repository.bean.UserInfoDao
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun userInfoDao() : UserInfoDao
+    abstract fun userInfoDao(): UserInfoDao
 }

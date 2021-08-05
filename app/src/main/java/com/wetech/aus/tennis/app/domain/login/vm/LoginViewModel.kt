@@ -6,7 +6,6 @@ import androidx.datastore.preferences.edit
 import androidx.datastore.preferences.preferencesKey
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.google.gson.Gson
 import com.poker.common.base.BaseViewModel
 import com.poker.common.exception.BaseHttpException
 import com.poker.common.interceptor.TokenInterceptor.Companion.TOKEN

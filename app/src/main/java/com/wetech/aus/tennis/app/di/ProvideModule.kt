@@ -5,8 +5,8 @@ import androidx.room.Room
 import com.google.gson.Gson
 import com.poker.common.converter.gson.RetroGsonConverterFactory
 import com.poker.common.interceptor.TokenInterceptor
-import com.wetech.aus.tennis.app.app.AppDatabase
 import com.wetech.aus.tennis.app.BuildConfig
+import com.wetech.aus.tennis.app.app.AppDatabase
 import com.wetech.aus.tennis.app.bean.ApiService
 import com.wetech.aus.tennis.app.bean.DataWrapper
 import com.wetech.aus.tennis.app.di.ProjectConfig.BASE_URL
@@ -106,7 +106,7 @@ object DataBaseModule {
 
     @Provides
     @Singleton
-    fun provideUserInfoDao(appDatabase : AppDatabase) : UserInfoDao{
+    fun provideUserInfoDao(appDatabase: AppDatabase): UserInfoDao {
         return appDatabase.userInfoDao()
     }
 }
