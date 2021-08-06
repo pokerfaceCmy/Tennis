@@ -11,7 +11,7 @@ import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListResponse
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/5/21 11:50
- * @Desc: TODO
+ * @Desc:
  * @GitHub：https://github.com/pokerfaceCmy
  */
 class RecommendAdapter :

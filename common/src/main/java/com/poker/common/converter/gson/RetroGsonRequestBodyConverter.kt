@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/7/9 11:01
- * @Desc: TODO
+ * @Desc: OkHttp转换器
  * @GitHub：https://github.com/pokerfaceCmy
  */
 class RetroGsonRequestBodyConverter<T> constructor(

@@ -3,7 +3,7 @@ package com.wetech.aus.tennis.app.domain.home.repository.bean
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/8/2 9:47
- * @Desc: TODO
+ * @Desc:
  * @GitHub：https://github.com/pokerfaceCmy
  */
 data class BannerResponse(

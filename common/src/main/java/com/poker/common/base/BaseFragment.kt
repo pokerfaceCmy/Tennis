@@ -22,7 +22,7 @@ import java.lang.reflect.ParameterizedType
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/4/15 10:23
- * @Desc: TODO
+ * @Desc: Fragment基类
  * @GitHub：https://github.com/pokerfaceCmy
  */
 

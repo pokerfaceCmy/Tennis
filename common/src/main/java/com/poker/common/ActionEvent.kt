@@ -5,7 +5,7 @@ import kotlinx.coroutines.Job
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/4/12 17:33
- * @Desc: TODO
+ * @Desc: view action
  * @GitHub：https://github.com/pokerfaceCmy
  */
 open class BaseActionEvent

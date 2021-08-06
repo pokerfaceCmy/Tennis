@@ -3,7 +3,7 @@ package com.poker.common.callback
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/4/12 18:18
- * @Desc: TODO
+ * @Desc: 请求成功
  * @GitHub：https://github.com/pokerfaceCmy
  */
 class RequestCallback<Data>(

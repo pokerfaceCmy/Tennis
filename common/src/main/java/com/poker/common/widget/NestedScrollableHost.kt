@@ -13,7 +13,7 @@ import kotlin.math.sign
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/5/19 8:52
- * @Desc: TODO
+ * @Desc: 处理滑动冲突
  * @GitHub：https://github.com/pokerfaceCmy
  */
 class NestedScrollableHost : FrameLayout {

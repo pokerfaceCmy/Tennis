@@ -10,7 +10,7 @@ import com.wetech.aus.tennis.widget.TrapezoidImgView
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/5/24 11:46
- * @Desc: TODO
+ * @Desc:
  * @GitHub：https://github.com/pokerfaceCmy
  */
 class RecommendAdapter :

@@ -5,7 +5,7 @@ import com.poker.common.exception.BaseHttpException
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/4/13 14:48
- * @Desc: TODO
+ * @Desc: 网络请求的结果Callback
  * @GitHub：https://github.com/pokerfaceCmy
  */
 open class BaseRequestCallback(

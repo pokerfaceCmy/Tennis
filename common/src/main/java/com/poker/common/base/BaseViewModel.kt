@@ -13,7 +13,7 @@ import java.util.*
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/4/12 17:32
- * @Desc: TODO
+ * @Desc: ViewMode基类
  * @GitHub：https://github.com/pokerfaceCmy
  */
 open class BaseViewModel : ViewModel(), IViewModelActionEvent {

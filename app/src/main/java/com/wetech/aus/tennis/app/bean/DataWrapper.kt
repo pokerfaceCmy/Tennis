@@ -5,7 +5,7 @@ import com.poker.common.bean.IApiResult
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/7/29 9:52
- * @Desc: TODO
+ * @Desc: app网络请求返回
  * @GitHub：https://github.com/pokerfaceCmy
  */
 data class DataWrapper<Data>(

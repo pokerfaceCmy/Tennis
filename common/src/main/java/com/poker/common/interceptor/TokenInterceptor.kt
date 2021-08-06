@@ -12,7 +12,7 @@ import javax.inject.Inject
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/7/30 14:08
- * @Desc: TODO
+ * @Desc: token拦截器
  * @GitHub：https://github.com/pokerfaceCmy
  */
 class TokenInterceptor @Inject constructor(

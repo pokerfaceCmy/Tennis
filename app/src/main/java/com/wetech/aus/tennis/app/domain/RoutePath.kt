@@ -3,7 +3,7 @@ package com.wetech.aus.tennis.app.domain
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/5/18 14:08
- * @Desc: TODO
+ * @Desc: 路由表
  * @GitHub：https://github.com/pokerfaceCmy
  */
 object RoutePath {

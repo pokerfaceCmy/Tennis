@@ -3,7 +3,7 @@ package com.poker.common.bean
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/4/13 17:33
- * @Desc: TODO
+ * @Desc: 网络请求的实体类接口
  * @GitHub：https://github.com/pokerfaceCmy
  */
 interface IApiResult<Data> {

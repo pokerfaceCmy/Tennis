@@ -14,7 +14,7 @@ import retrofit2.http.Query
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/7/29 9:58
- * @Desc: TODO
+ * @Desc: retrofit接口类
  * @GitHub：https://github.com/pokerfaceCmy
  */
 interface ApiService {

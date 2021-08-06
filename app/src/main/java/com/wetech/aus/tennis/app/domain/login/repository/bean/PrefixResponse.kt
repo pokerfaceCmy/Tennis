@@ -3,7 +3,7 @@ package com.wetech.aus.tennis.app.domain.login.repository.bean
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/7/29 11:10
- * @Desc: TODO
+ * @Desc:
  * @GitHub：https://github.com/pokerfaceCmy
  */
 

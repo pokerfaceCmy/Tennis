@@ -1,7 +1,5 @@
 <resources>
     <!--
-    TODO: Before you run your application, you need a Google Maps API key.
-
     To get one, follow this link, follow the directions and press "Create" at the end:
 
     https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=F4:87:D7:46:B4:E7:62:25:DA:3C:19:B0:97:45:8B:73:37:F9:1B:75%3Bcom.wetech.aus.tennis.app.domian.courts.ui

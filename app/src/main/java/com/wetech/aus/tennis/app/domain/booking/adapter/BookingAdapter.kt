@@ -9,7 +9,7 @@ import com.wetech.aus.tennis.app.R
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/5/20 10:54
- * @Desc: TODO
+ * @Desc:
  * @GitHub：https://github.com/pokerfaceCmy
  */
 class BookingAdapter : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_booking) {

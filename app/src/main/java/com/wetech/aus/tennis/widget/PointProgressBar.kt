@@ -13,7 +13,7 @@ import com.wetech.aus.tennis.app.R
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/5/20 16:09
- * @Desc: TODO
+ * @Desc: 自定义进度条
  * @GitHub：https://github.com/pokerfaceCmy
  */
 class PointProgressBar @JvmOverloads constructor(

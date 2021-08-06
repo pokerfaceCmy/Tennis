@@ -12,7 +12,7 @@ import java.lang.reflect.Type
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/7/9 9:01
- * @Desc: TODO
+ * @Desc: OkHttp转换器
  * @GitHub：https://github.com/pokerfaceCmy
  */
 class RetroGsonConverterFactory<ApiResultType : IApiResult<*>>

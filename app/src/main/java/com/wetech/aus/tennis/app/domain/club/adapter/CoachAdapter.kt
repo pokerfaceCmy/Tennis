@@ -10,7 +10,7 @@ import com.wetech.aus.tennis.app.R
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/5/24 15:21
- * @Desc: TODO
+ * @Desc:
  * @GitHub：https://github.com/pokerfaceCmy
  */
 class CoachAdapter : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_club_coach) {

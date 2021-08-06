@@ -5,7 +5,7 @@ import java.io.IOException
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/4/14 11:43
- * @Desc: TODO
+ * @Desc: 错误处理
  * @GitHub：https://github.com/pokerfaceCmy
  */
 open class BaseHttpException constructor(
