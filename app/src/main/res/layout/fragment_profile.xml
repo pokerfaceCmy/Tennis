@@ -37,6 +37,7 @@
         tools:ignore="SmallSp" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:visibility="invisible"
         android:id="@+id/tvNotifications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -84,7 +85,6 @@
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="30.5dp"
         app:cardCornerRadius="7.5dp"
-        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar">
@@ -185,7 +185,6 @@
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="17dp"
         app:cardCornerRadius="7.5dp"
-        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
