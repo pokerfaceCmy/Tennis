@@ -14,4 +14,6 @@ class BookingClient @Inject constructor(
     private val apiService: ApiService
 ) {
     suspend fun queryBookingList(bookingRequest : BookingRequest) = apiService.queryBookingList(bookingRequest)
+
+    suspend fun getDays(day: String,intervals: Int) = apiService.getDays(day, intervals)
 }

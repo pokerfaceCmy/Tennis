@@ -2,6 +2,7 @@ package com.wetech.aus.tennis.app.bean
 
 import com.wetech.aus.tennis.app.domain.booking.repository.bean.BookingListResponse
 import com.wetech.aus.tennis.app.domain.booking.repository.bean.BookingRequest
+import com.wetech.aus.tennis.app.domain.booking.repository.bean.DaysResponse
 import com.wetech.aus.tennis.app.domain.home.repository.bean.BannerResponse
 import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListRequest
 import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListResponse
@@ -84,5 +85,16 @@ interface ApiService {
      * 获取预定信息
      */
     @POST("/order/queryOrderedPlace")
-    suspend fun queryBookingList(@Body bookingRequest : BookingRequest) : BookingListResponse?
+    suspend fun queryBookingList(@Body bookingRequest: BookingRequest): BookingListResponse?
+
+    /**
+     * 获取预约头部的日期列表
+     * @param day 日期（2021-01-21）
+     * @param intervals 后几天（1）
+     */
+    @GET("/place/getDays")
+    suspend fun getDays(
+        @Query("day") day: String,
+        @Query("intervals") intervals: Int
+    ): DaysResponse?
 }
