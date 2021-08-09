@@ -20,4 +20,5 @@ class HomeClient @Inject constructor(
         apiService.queryClubList(clubListRequest)
 
     suspend fun likeClub(clubId: Long, type: String) = apiService.likeClub(clubId, type)
+
 }

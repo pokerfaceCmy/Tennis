@@ -1,5 +1,7 @@
 package com.wetech.aus.tennis.app.bean
 
+import com.wetech.aus.tennis.app.domain.booking.repository.bean.BookingListResponse
+import com.wetech.aus.tennis.app.domain.booking.repository.bean.BookingRequest
 import com.wetech.aus.tennis.app.domain.home.repository.bean.BannerResponse
 import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListRequest
 import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListResponse
@@ -76,4 +78,11 @@ interface ApiService {
         @Query("clubId") clubId: Long,
         @Query("type") type: String
     ): DataWrapper<*>
+
+
+    /**
+     * 获取预定信息
+     */
+    @POST("/order/queryOrderedPlace")
+    suspend fun queryBookingList(@Body bookingRequest : BookingRequest) : BookingListResponse?
 }

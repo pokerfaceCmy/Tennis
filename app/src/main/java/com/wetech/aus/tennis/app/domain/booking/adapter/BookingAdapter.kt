@@ -5,6 +5,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.google.android.material.imageview.ShapeableImageView
 import com.wetech.aus.tennis.app.R
+import com.wetech.aus.tennis.app.domain.booking.repository.bean.BookingListResponse
 
 /**
  * @Author: pokerfaceCmy
@@ -12,12 +13,13 @@ import com.wetech.aus.tennis.app.R
  * @Desc:
  * @GitHub：https://github.com/pokerfaceCmy
  */
-class BookingAdapter : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_booking) {
-    override fun convert(holder: BaseViewHolder, item: String) {
+class BookingAdapter :
+    BaseQuickAdapter<BookingListResponse.Data?, BaseViewHolder>(R.layout.item_booking) {
+
+    override fun convert(holder: BaseViewHolder, item: BookingListResponse.Data?) {
         val ivClub = holder.getView<ShapeableImageView>(R.id.ivClub)
-        ivClub.load("https://img95.699pic.com/xsj/0q/p7/1c.jpg!/fh/300")
+        ivClub.load(item?.clubInfo?.cover)
 
-        holder.setText(R.id.tvName, "Tennis Club Tennis Club Tennis Club Tennis Club")
-
+        holder.setText(R.id.tvName, item?.clubInfo?.name)
     }
 }
