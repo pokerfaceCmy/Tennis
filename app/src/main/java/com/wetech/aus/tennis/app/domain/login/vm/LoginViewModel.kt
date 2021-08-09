@@ -37,8 +37,8 @@ class LoginViewModel @Inject constructor(
     val checkHasUserLD = MutableLiveData<Boolean>()
     val loginLd = MutableLiveData<LoginResponse>()
 
-    fun sendSms() {
-        enqueue({ loginClient.sendSms() }) {
+    fun sendSms(phone: String, prefix: String) {
+        enqueue({ loginClient.sendSms(phone, prefix) }) {
             onSuccess {
 
             }

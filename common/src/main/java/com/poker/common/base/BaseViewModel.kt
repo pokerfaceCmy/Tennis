@@ -3,6 +3,7 @@ package com.poker.common.base
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.alibaba.android.arouter.launcher.ARouter
 import com.poker.common.*
 import com.poker.common.callback.RequestCallback
 import com.poker.common.exception.BaseHttpException
@@ -88,6 +89,11 @@ open class BaseViewModel : ViewModel(), IViewModelActionEvent {
             }
 
             is ServerException -> {
+                if (ex.errCode == 3002) {
+                    ARouter.getInstance()
+                        .build("/login/SmsLoginActivity")
+                        .navigation()
+                }
                 if (showErrorMsg) {
                     showToast(ex.errMsg)
                 }

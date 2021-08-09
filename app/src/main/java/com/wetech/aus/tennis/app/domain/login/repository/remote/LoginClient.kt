@@ -13,8 +13,11 @@ import javax.inject.Inject
 class LoginClient @Inject constructor(
     private val apiService: ApiService
 ) {
-    suspend fun sendSms() = apiService.sendSms()
+    suspend fun sendSms(phone: String, prefix: String) = apiService.sendSms(phone, prefix)
+
     suspend fun getCountryMobilePrefix() = apiService.getCountryMobilePrefix()
+
     suspend fun checkHasUser(phone: String, prefix: String) = apiService.checkHasUser(phone, prefix)
+
     suspend fun login(loginRequest: LoginRequest) = apiService.login(loginRequest)
 }

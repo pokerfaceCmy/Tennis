@@ -1,5 +1,6 @@
 package com.wetech.aus.tennis.app.domain.courts.adapter
 
+import androidx.appcompat.widget.AppCompatImageView
 import coil.load
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
@@ -20,8 +21,13 @@ class RecommendAdapter :
         holder.setText(R.id.tvName, item.name)
         holder.setText(R.id.tvBriefIntroduction, item.clubDesc)
         holder.setText(R.id.tvPhone, item.tel)
+        holder.setText(R.id.tvDistance, item.distance.toString() + "m")
 
         val img = holder.getView<TrapezoidImgView>(R.id.img)
         img.load(item.cover)
+
+        val ivLike = holder.getView<AppCompatImageView>(R.id.ivLike)
+        ivLike.load(if (item.enjoy == 1) R.drawable.ic_favorites_h else R.drawable.ic_favorites_n)
+
     }
 }

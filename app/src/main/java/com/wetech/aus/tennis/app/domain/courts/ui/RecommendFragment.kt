@@ -1,10 +1,13 @@
 package com.wetech.aus.tennis.app.domain.courts.ui
 
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.android.arouter.launcher.ARouter
 import com.poker.common.base.BaseFragment
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.wetech.aus.tennis.app.databinding.FragmentRecommendBinding
+import com.wetech.aus.tennis.app.domain.RoutePath
+import com.wetech.aus.tennis.app.domain.club.ClubDetailActivity.Companion.CLUB_DETAIL
 import com.wetech.aus.tennis.app.domain.courts.adapter.RecommendAdapter
 import com.wetech.aus.tennis.app.domain.courts.vm.CourtsViewModel
 import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListRequest
@@ -67,6 +70,13 @@ class RecommendFragment : BaseFragment<FragmentRecommendBinding>() {
                     )
                 }
             })
+
+            recommendAdapter.setOnItemClickListener { adapter, _, position ->
+                ARouter.getInstance()
+                    .build(RoutePath.Club.ClubDetailActivity)
+                    .withObject(CLUB_DETAIL, adapter.data[position])
+                    .navigation()
+            }
         }
     }
 }

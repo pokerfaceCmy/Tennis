@@ -30,7 +30,7 @@ object Deps {
 
     object Jetpack {
         object Hilt {
-            private const val version = "2.38"
+            private const val version = "2.38.1"
 
             const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$version"
             const val hiltAndroid = "com.google.dagger:hilt-android:$version"

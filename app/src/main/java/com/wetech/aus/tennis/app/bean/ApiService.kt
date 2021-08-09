@@ -22,7 +22,10 @@ interface ApiService {
      * 发送验证码
      */
     @GET("/system/sendSms")
-    suspend fun sendSms(): DataWrapper<*>
+    suspend fun sendSms(
+        @Query("phone") phone: String,
+        @Query("prefix") prefix: String
+    ): DataWrapper<*>
 
     /**
      * 获取国家对应的区号

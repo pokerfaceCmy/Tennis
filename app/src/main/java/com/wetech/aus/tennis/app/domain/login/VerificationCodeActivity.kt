@@ -49,7 +49,7 @@ class VerificationCodeActivity : BaseActivity<ActivityVerificationCodeBinding>()
     }
 
     override fun init() {
-        viewModel.sendSms()
+        viewModel.sendSms(phone, phonePrefix)
         binding.apply {
             btnBack.setOnClickListener { finish() }
             codeEditText.onTextCompleteListener = object : PinField.OnTextCompleteListener {

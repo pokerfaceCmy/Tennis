@@ -80,7 +80,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment(), IUIActionEventObserv
                 }
 
             })
-            .asCustom(mContext?.let { SimpleLoadingDialog(it) })
+            .asCustom(SimpleLoadingDialog(mContext))
 
     }
 
