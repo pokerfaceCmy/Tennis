@@ -3,6 +3,7 @@ package com.wetech.aus.tennis.app.bean
 import com.wetech.aus.tennis.app.domain.booking.repository.bean.BookingListResponse
 import com.wetech.aus.tennis.app.domain.booking.repository.bean.BookingRequest
 import com.wetech.aus.tennis.app.domain.booking.repository.bean.DaysResponse
+import com.wetech.aus.tennis.app.domain.booking.repository.bean.UsablePlaceTimeResponse
 import com.wetech.aus.tennis.app.domain.home.repository.bean.BannerResponse
 import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListRequest
 import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListResponse
@@ -97,4 +98,13 @@ interface ApiService {
         @Query("day") day: String,
         @Query("intervals") intervals: Int
     ): DaysResponse?
+
+    /**
+     * 获取可用时间段
+     * @param day 日期（2021-01-21）
+     */
+    @GET("/place/getUsablePlaceTime")
+    suspend fun getUsablePlaceTime(
+        @Query("day") day: String,
+    ): UsablePlaceTimeResponse?
 }

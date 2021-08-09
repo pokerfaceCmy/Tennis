@@ -56,6 +56,7 @@ class ClubDetailActivity : BaseActivity<ActivityClubDetailBinding>() {
             clBooking.setOnClickListener {
                 ARouter.getInstance()
                     .build(RoutePath.Club.ClubBookingActivity)
+                    .withObject(CLUB_DETAIL,clubDetail)
                     .navigation()
             }
 

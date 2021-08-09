@@ -42,4 +42,5 @@
     <string name="retrieve_password">Retrieve password</string>
     <string name="next">Next</string>
     <string name="please_select_the_booking_date">Please select the booking date</string>
+    <string name="please_select_the_booking_time">Please select the booking time</string>
 </resources>

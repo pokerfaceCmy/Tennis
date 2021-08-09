@@ -6,6 +6,7 @@ import com.wetech.aus.tennis.app.domain.booking.repository.BookingClient
 import com.wetech.aus.tennis.app.domain.booking.repository.bean.BookingListResponse
 import com.wetech.aus.tennis.app.domain.booking.repository.bean.BookingRequest
 import com.wetech.aus.tennis.app.domain.booking.repository.bean.DaysResponse
+import com.wetech.aus.tennis.app.domain.booking.repository.bean.UsablePlaceTimeResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -21,6 +22,7 @@ class BookingViewModel @Inject constructor(
 ) : BaseViewModel() {
     val queryBookingListLD = MutableLiveData<BookingListResponse?>()
     val getDaysLD = MutableLiveData<DaysResponse?>()
+    val getUsablePlaceByDayLD = MutableLiveData<UsablePlaceTimeResponse?>()
 
     fun queryBookingList(bookingRequest: BookingRequest) {
         enqueue({ bookingClient.queryBookingList(bookingRequest) }) {
@@ -34,6 +36,14 @@ class BookingViewModel @Inject constructor(
         enqueue({ bookingClient.getDays(day, intervals) }) {
             onSuccess {
                 getDaysLD.value = it
+            }
+        }
+    }
+
+    fun getUsablePlaceByDay(day: String) {
+        enqueue({ bookingClient.getUsablePlaceTime(day) }) {
+            onSuccess {
+                getUsablePlaceByDayLD.value = it
             }
         }
     }

@@ -16,4 +16,6 @@ class BookingClient @Inject constructor(
     suspend fun queryBookingList(bookingRequest : BookingRequest) = apiService.queryBookingList(bookingRequest)
 
     suspend fun getDays(day: String,intervals: Int) = apiService.getDays(day, intervals)
+
+    suspend fun getUsablePlaceTime(day: String) = apiService.getUsablePlaceTime(day)
 }
