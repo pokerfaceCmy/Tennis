@@ -7,14 +7,14 @@ package com.wetech.aus.tennis.app.domain.booking.repository.bean
  * @GitHub：https://github.com/pokerfaceCmy
  */
 data class UsablePlaceTimeResponse(
-    val list: List<Data>
+    val list: List<Data>?
 ) {
     data class Data(
-        val desc: Int,
-        val endSlot: String,
-        val startSlot: String,
-        val status: String,
-        val time: String,
+        val desc: Int?,
+        val endSlot: String?,
+        val startSlot: String?,
+        val status: String?,
+        val time: String?,
         var isCheck: Boolean = false
     )
 }

@@ -22,7 +22,7 @@ class BookingViewModel @Inject constructor(
 ) : BaseViewModel() {
     val queryBookingListLD = MutableLiveData<BookingListResponse?>()
     val getDaysLD = MutableLiveData<DaysResponse?>()
-    val getUsablePlaceByDayLD = MutableLiveData<UsablePlaceTimeResponse?>()
+    val getUsablePlaceTimeLD = MutableLiveData<UsablePlaceTimeResponse?>()
 
     fun queryBookingList(bookingRequest: BookingRequest) {
         enqueue({ bookingClient.queryBookingList(bookingRequest) }) {
@@ -40,11 +40,15 @@ class BookingViewModel @Inject constructor(
         }
     }
 
-    fun getUsablePlaceByDay(day: String) {
+    fun getUsablePlaceTime(day: String) {
         enqueue({ bookingClient.getUsablePlaceTime(day) }) {
             onSuccess {
-                getUsablePlaceByDayLD.value = it
+                getUsablePlaceTimeLD.value = it
             }
         }
+    }
+
+    fun getUsablePlaceByDay(){
+
     }
 }

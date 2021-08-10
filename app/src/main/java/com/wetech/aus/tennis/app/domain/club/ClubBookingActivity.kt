@@ -3,6 +3,7 @@ package com.wetech.aus.tennis.app.domain.club
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
+import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.poker.common.base.BaseActivity
@@ -25,7 +26,7 @@ class ClubBookingActivity : BaseActivity<ActivityClubBookingBinding>() {
             dateAdapter.setList(it?.list)
         })
 
-        getUsablePlaceByDayLD.observe(mLifecycleOwner, {
+        getUsablePlaceTimeLD.observe(mLifecycleOwner, {
             timeAdapter.setList(it?.list)
         })
     }
@@ -53,7 +54,7 @@ class ClubBookingActivity : BaseActivity<ActivityClubBookingBinding>() {
             rvDate.layoutManager = LinearLayoutManager(mContext, HORIZONTAL, false)
             rvDate.adapter = dateAdapter
 
-            rvTime.layoutManager = LinearLayoutManager(mContext, HORIZONTAL, false)
+            rvTime.layoutManager = LinearLayoutManager(mContext, VERTICAL, false)
             rvTime.adapter = timeAdapter
 
             dateAdapter.setOnItemClickListener { adapter, _, position ->
@@ -65,10 +66,10 @@ class ClubBookingActivity : BaseActivity<ActivityClubBookingBinding>() {
                 data[position].isCheck = true
                 dateAdapter.setList(data)
 
-                viewModel.getUsablePlaceByDay(day = data[position].date.toString())
+                viewModel.getUsablePlaceTime(day = data[position].date.toString())
             }
 
-            timeAdapter.setOnItemClickListener { adapter, view, position ->
+            timeAdapter.setOnItemClickListener { adapter, _, position ->
                 textView2.visibility = View.VISIBLE
                 rvPlace.visibility = View.VISIBLE
 
@@ -78,9 +79,9 @@ class ClubBookingActivity : BaseActivity<ActivityClubBookingBinding>() {
                 }
                 data[position].isCheck = true
                 timeAdapter.setList(data)
-                // TODO: 2021/8/9 viewModel.获取可用场地
-            }
 
+                viewModel.getUsablePlaceByDay()
+            }
 
         }
     }
