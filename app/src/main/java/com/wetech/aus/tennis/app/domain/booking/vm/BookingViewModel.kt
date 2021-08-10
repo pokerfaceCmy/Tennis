@@ -3,10 +3,7 @@ package com.wetech.aus.tennis.app.domain.booking.vm
 import androidx.lifecycle.MutableLiveData
 import com.poker.common.base.BaseViewModel
 import com.wetech.aus.tennis.app.domain.booking.repository.BookingClient
-import com.wetech.aus.tennis.app.domain.booking.repository.bean.BookingListResponse
-import com.wetech.aus.tennis.app.domain.booking.repository.bean.BookingRequest
-import com.wetech.aus.tennis.app.domain.booking.repository.bean.DaysResponse
-import com.wetech.aus.tennis.app.domain.booking.repository.bean.UsablePlaceTimeResponse
+import com.wetech.aus.tennis.app.domain.booking.repository.bean.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -23,6 +20,7 @@ class BookingViewModel @Inject constructor(
     val queryBookingListLD = MutableLiveData<BookingListResponse?>()
     val getDaysLD = MutableLiveData<DaysResponse?>()
     val getUsablePlaceTimeLD = MutableLiveData<UsablePlaceTimeResponse?>()
+    val getUsablePlaceByDayLD = MutableLiveData<UsablePlaceByDayResponse?>()
 
     fun queryBookingList(bookingRequest: BookingRequest) {
         enqueue({ bookingClient.queryBookingList(bookingRequest) }) {
@@ -48,7 +46,16 @@ class BookingViewModel @Inject constructor(
         }
     }
 
-    fun getUsablePlaceByDay(){
-
+    fun getUsablePlaceByDay(
+        day: String,
+        startSlot: String,
+        endSlot: String,
+        clubId: Long
+    ) {
+        enqueue({ bookingClient.getUsablePlaceByDay(day, startSlot, endSlot, clubId) }) {
+            onSuccess {
+                getUsablePlaceByDayLD.value = it
+            }
+        }
     }
 }

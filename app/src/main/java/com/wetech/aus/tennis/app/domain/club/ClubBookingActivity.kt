@@ -14,6 +14,7 @@ import com.wetech.aus.tennis.app.domain.booking.repository.bean.DaysResponse
 import com.wetech.aus.tennis.app.domain.booking.repository.bean.UsablePlaceTimeResponse
 import com.wetech.aus.tennis.app.domain.booking.vm.BookingViewModel
 import com.wetech.aus.tennis.app.domain.club.adapter.DateAdapter
+import com.wetech.aus.tennis.app.domain.club.adapter.PlaceAdapter
 import com.wetech.aus.tennis.app.domain.club.adapter.TimeAdapter
 import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListResponse
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,6 +30,10 @@ class ClubBookingActivity : BaseActivity<ActivityClubBookingBinding>() {
         getUsablePlaceTimeLD.observe(mLifecycleOwner, {
             timeAdapter.setList(it?.list)
         })
+
+        getUsablePlaceByDayLD.observe(mLifecycleOwner, {
+            placeAdapter.setList(it?.list)
+        })
     }
 
     @Autowired
@@ -42,6 +47,9 @@ class ClubBookingActivity : BaseActivity<ActivityClubBookingBinding>() {
         TimeAdapter()
     }
 
+    private val placeAdapter by lazy {
+        PlaceAdapter()
+    }
 
     @Suppress("UNCHECKED_CAST")
     override fun init() {
@@ -80,9 +88,19 @@ class ClubBookingActivity : BaseActivity<ActivityClubBookingBinding>() {
                 data[position].isCheck = true
                 timeAdapter.setList(data)
 
-                viewModel.getUsablePlaceByDay()
+                val req = data[position]
+
+                viewModel.getUsablePlaceByDay(
+                    req.time ?: "",
+                    req.startSlot ?: "",
+                    req.endSlot ?: "",
+                    clubDetail.id ?: 0
+                )
             }
 
+            placeAdapter.setOnItemClickListener { adapter, _, position ->
+
+            }
         }
     }
 }

@@ -13,7 +13,6 @@ import com.wetech.aus.tennis.app.domain.RoutePath
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
-import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -44,7 +43,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
                 })
         } else {
-            Timber.e(token)
             ARouter.getInstance()
                 .build(RoutePath.MainActivity)
                 .navigation(mContext, object : NavigationCallback {
