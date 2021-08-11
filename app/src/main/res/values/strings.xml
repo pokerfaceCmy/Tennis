@@ -43,4 +43,5 @@
     <string name="next">Next</string>
     <string name="please_select_the_booking_date">Please select the booking date</string>
     <string name="please_select_the_booking_time">Please select the booking time</string>
+    <string name="choose_a_country">Choose a country</string>
 </resources>

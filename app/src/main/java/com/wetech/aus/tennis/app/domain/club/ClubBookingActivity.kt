@@ -70,6 +70,12 @@ class ClubBookingActivity : BaseActivity<ActivityClubBookingBinding>() {
             rvPlace.adapter = placeAdapter
 
             dateAdapter.setOnItemClickListener { adapter, _, position ->
+                val placeData = placeAdapter.data as List<UsablePlaceByDayResponse.Data>
+                placeData.map {
+                    it.isCheck = false
+                }
+                placeAdapter.setList(placeData)
+
                 cardView2.visibility = VISIBLE
                 val data = adapter.data as List<DaysResponse.Data>
                 data.map {
