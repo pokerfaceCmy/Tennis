@@ -1,6 +1,6 @@
 package com.wetech.aus.tennis.app.domain.club
 
-import android.view.View
+import android.view.View.VISIBLE
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
@@ -11,6 +11,7 @@ import com.wetech.aus.tennis.app.R
 import com.wetech.aus.tennis.app.databinding.ActivityClubBookingBinding
 import com.wetech.aus.tennis.app.domain.RoutePath
 import com.wetech.aus.tennis.app.domain.booking.repository.bean.DaysResponse
+import com.wetech.aus.tennis.app.domain.booking.repository.bean.UsablePlaceByDayResponse
 import com.wetech.aus.tennis.app.domain.booking.repository.bean.UsablePlaceTimeResponse
 import com.wetech.aus.tennis.app.domain.booking.vm.BookingViewModel
 import com.wetech.aus.tennis.app.domain.club.adapter.DateAdapter
@@ -65,8 +66,11 @@ class ClubBookingActivity : BaseActivity<ActivityClubBookingBinding>() {
             rvTime.layoutManager = LinearLayoutManager(mContext, VERTICAL, false)
             rvTime.adapter = timeAdapter
 
+            rvPlace.layoutManager = LinearLayoutManager(mContext, HORIZONTAL, false)
+            rvPlace.adapter = placeAdapter
+
             dateAdapter.setOnItemClickListener { adapter, _, position ->
-                cardView2.visibility = View.VISIBLE
+                cardView2.visibility = VISIBLE
                 val data = adapter.data as List<DaysResponse.Data>
                 data.map {
                     it.isCheck = false
@@ -78,8 +82,8 @@ class ClubBookingActivity : BaseActivity<ActivityClubBookingBinding>() {
             }
 
             timeAdapter.setOnItemClickListener { adapter, _, position ->
-                textView2.visibility = View.VISIBLE
-                rvPlace.visibility = View.VISIBLE
+                textView2.visibility = VISIBLE
+                rvPlace.visibility = VISIBLE
 
                 val data = adapter.data as List<UsablePlaceTimeResponse.Data>
                 data.map {
@@ -99,7 +103,14 @@ class ClubBookingActivity : BaseActivity<ActivityClubBookingBinding>() {
             }
 
             placeAdapter.setOnItemClickListener { adapter, _, position ->
+                val data = adapter.data as List<UsablePlaceByDayResponse.Data>
+                data.map {
+                    it.isCheck = false
+                }
+                data[position].isCheck = true
+                placeAdapter.setList(data)
 
+                btnBooking.visibility = VISIBLE
             }
         }
     }

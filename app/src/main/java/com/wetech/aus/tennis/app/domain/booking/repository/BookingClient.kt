@@ -7,7 +7,7 @@ import javax.inject.Inject
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/8/9 14:58
- * @Desc: TODO
+ * @Desc:
  * @GitHub：https://github.com/pokerfaceCmy
  */
 class BookingClient @Inject constructor(

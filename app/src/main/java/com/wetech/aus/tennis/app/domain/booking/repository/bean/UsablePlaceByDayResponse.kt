@@ -16,5 +16,6 @@ data class UsablePlaceByDayResponse(
         val intro: String?,
         val name: String?,
         val status: String?,
+        var isCheck : Boolean = false
     )
 }

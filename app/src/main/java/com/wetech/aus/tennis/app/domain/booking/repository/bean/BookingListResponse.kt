@@ -5,7 +5,7 @@ import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListResponse
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/8/9 15:00
- * @Desc: TODO
+ * @Desc:
  * @GitHub：https://github.com/pokerfaceCmy
  */
 data class BookingListResponse(
