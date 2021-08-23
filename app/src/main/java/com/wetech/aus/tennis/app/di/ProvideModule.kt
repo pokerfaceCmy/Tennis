@@ -58,8 +58,9 @@ object NetWorkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(tokenInterceptor: TokenInterceptor): OkHttpClient {
-        val logInterceptor = HttpLoggingInterceptor()
-        logInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        val logInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
 
         val okHttpClient = OkHttpClient.Builder()
             .readTimeout(TIMEOUT, TimeUnit.SECONDS)
@@ -84,7 +85,7 @@ object NetWorkModule {
 
     @Provides
     @Singleton
-    fun provideMainService(retrofit: Retrofit): ApiService {
+    fun provideApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
 }

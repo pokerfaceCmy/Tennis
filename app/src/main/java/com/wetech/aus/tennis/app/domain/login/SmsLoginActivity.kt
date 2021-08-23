@@ -15,6 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SmsLoginActivity : BaseActivity<ActivitySmsLoginBinding>() {
     private var phonePrefix = "86"
+
     @SuppressLint("SetTextI18n")
     val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {

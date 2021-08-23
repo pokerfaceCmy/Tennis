@@ -66,7 +66,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         )
 
         binding.apply {
-            toolBar.tvTitle.text = getString(R.string.hi_tennis)
             mViewPager = root.findViewById(R.id.banner)
 
             mViewPager.apply {
@@ -110,6 +109,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             val pagerSnapHelper1 = PagerSnapHelper()
             pagerSnapHelper1.attachToRecyclerView(rvFavourites)
 
+            favouriteAdapter.setOnItemClickListener { adapter, _, position ->
+                ARouter.getInstance()
+                    .build(RoutePath.Club.ClubDetailActivity)
+                    .withObject(CLUB_DETAIL, adapter.data[position])
+                    .navigation()
+            }
         }
     }
 

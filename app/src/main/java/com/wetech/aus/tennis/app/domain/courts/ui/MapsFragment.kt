@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.*
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.jeremyliao.liveeventbus.LiveEventBus
@@ -16,11 +17,27 @@ import com.permissionx.guolindev.PermissionX
 import com.poker.common.base.BaseFragment
 import com.wetech.aus.tennis.app.R
 import com.wetech.aus.tennis.app.databinding.FragmentMapsBinding
+import com.wetech.aus.tennis.app.domain.courts.vm.CourtsViewModel
+import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListRequest
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
 class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
+    private val viewModel by getViewModel(CourtsViewModel::class.java) {
+        queryMapClubListLD.observe(mLifecycleOwner, {
+            it?.list?.forEach { data ->
+                val sydney = LatLng(data.latitude ?: 0.00, data.longitude ?: 0.00)
+                mMap.addMarker(
+                    MarkerOptions()
+                        .position(sydney)
+                        .title("")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_tennis))
+                )
+            }
+        })
+    }
+
     private lateinit var mMapView: MapView
     private lateinit var mMap: GoogleMap
 
@@ -32,15 +49,30 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
 
     @SuppressLint("MissingPermission")
     override fun init() {
+        if (::mMap.isInitialized){
+            mMap.setOnMarkerClickListener { p0 ->
+                binding.cardView.visibility = View.VISIBLE
+                Timber.d(p0.position.toString())
+                true
+            }
+        }
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext)
         fusedLocationClient.lastLocation
             .addOnSuccessListener {
                 it?.let {
+                    viewModel.queryMapClubList(
+                        ClubListRequest(
+                            latitude = it.latitude.toString(),
+                            longitude = it.longitude.toString()
+                        )
+                    )
                     mMap.addMarker(
                         MarkerOptions().position(LatLng(it.latitude, it.longitude))
                     )
                 }
             }
+
     }
 
     override fun onCreateView(
@@ -48,6 +80,7 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        super.onCreateView(inflater, container, savedInstanceState)
         val rootView: View = inflater.inflate(R.layout.fragment_maps, container, false)
         mMapView = rootView.findViewById<View>(R.id.mapView) as MapView
         mMapView.onCreate(savedInstanceState)
@@ -64,6 +97,7 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         Timber.d("onMapReady")
         mMap = googleMap
+
     }
 
     override fun onResume() {
@@ -106,14 +140,15 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
                 override fun onLocationResult(locationResult: LocationResult?) {
                     locationResult ?: return
                     for (location in locationResult.locations) {
-                        mMap.moveCamera(
-                            CameraUpdateFactory.newLatLngZoom(
-                                LatLng(
-                                    location.latitude,
-                                    location.longitude
-                                ), 13F
-                            )
-                        )
+                        Timber.d(location.toString())
+//                        mMap.moveCamera(
+//                            CameraUpdateFactory.newLatLngZoom(
+//                                LatLng(
+//                                    -37.8208,
+//                                    144.9641
+//                                ), 10F
+//                            )
+//                        )
                     }
                 }
             },

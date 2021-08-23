@@ -15,9 +15,11 @@ data class BannerResponse(
 }
 
 data class ClubListRequest(
-    val pageNum: Int,
+    val pageNum: Int? = null,
     val pageSize: Int? = null,
-    val enjoy: Int? = null
+    val enjoy: Int? = null,
+    val latitude: String? = null,
+    val longitude: String? = null
 )
 
 data class ClubListResponse(
