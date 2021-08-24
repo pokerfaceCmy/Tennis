@@ -1,16 +1,21 @@
 package com.wetech.aus.tennis.app.domain.club
 
+import android.content.Intent
 import android.view.View.VISIBLE
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.braintreepayments.api.dropin.DropInActivity
+import com.braintreepayments.api.dropin.DropInRequest
+import com.braintreepayments.api.dropin.DropInResult
 import com.poker.common.base.BaseActivity
 import com.wetech.aus.tennis.app.R
 import com.wetech.aus.tennis.app.databinding.ActivityClubBookingBinding
 import com.wetech.aus.tennis.app.domain.RoutePath
 import com.wetech.aus.tennis.app.domain.booking.repository.bean.DaysResponse
+import com.wetech.aus.tennis.app.domain.booking.repository.bean.SaveOrderRequest
 import com.wetech.aus.tennis.app.domain.booking.repository.bean.UsablePlaceByDayResponse
 import com.wetech.aus.tennis.app.domain.booking.repository.bean.UsablePlaceTimeResponse
 import com.wetech.aus.tennis.app.domain.booking.vm.BookingViewModel
@@ -19,6 +24,7 @@ import com.wetech.aus.tennis.app.domain.club.adapter.PlaceAdapter
 import com.wetech.aus.tennis.app.domain.club.adapter.TimeAdapter
 import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListResponse
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @Route(path = RoutePath.Club.ClubBookingActivity)
 @AndroidEntryPoint
@@ -35,10 +41,30 @@ class ClubBookingActivity : BaseActivity<ActivityClubBookingBinding>() {
         getUsablePlaceByDayLD.observe(mLifecycleOwner, {
             placeAdapter.setList(it?.list)
         })
+
+        saveOrderLD.observe(mLifecycleOwner, {
+            orderId = it?.orderId ?: 0L
+            getToken()
+        })
+
+        getTokenLD.observe(mLifecycleOwner, {
+            val dropInRequest = DropInRequest().tokenizationKey(it?.payToken)
+            startActivityForResult(dropInRequest.getIntent(this@ClubBookingActivity), 200)
+        })
+
+        payPlayLD.observe(mLifecycleOwner, {
+            showToast(if (it?.payFlag == true) "预定成功" else "预定失败")
+        })
     }
 
     @Autowired
     lateinit var clubDetail: ClubListResponse.Data
+
+    private var orderDate: String = ""
+    private var startSlot: String = ""
+    private var endSlot: String = ""
+    private var placeId: Long = 0L
+    private var orderId: Long = 0L
 
     private val dateAdapter by lazy {
         DateAdapter()
@@ -78,6 +104,8 @@ class ClubBookingActivity : BaseActivity<ActivityClubBookingBinding>() {
 
                 cardView2.visibility = VISIBLE
                 val data = adapter.data as List<DaysResponse.Data>
+                orderDate = data[position].date ?: ""
+
                 data.map {
                     it.isCheck = false
                 }
@@ -92,6 +120,10 @@ class ClubBookingActivity : BaseActivity<ActivityClubBookingBinding>() {
                 rvPlace.visibility = VISIBLE
 
                 val data = adapter.data as List<UsablePlaceTimeResponse.Data>
+
+                startSlot = data[position].startSlot ?: ""
+                endSlot = data[position].endSlot ?: ""
+
                 data.map {
                     it.isCheck = false
                 }
@@ -110,6 +142,7 @@ class ClubBookingActivity : BaseActivity<ActivityClubBookingBinding>() {
 
             placeAdapter.setOnItemClickListener { adapter, _, position ->
                 val data = adapter.data as List<UsablePlaceByDayResponse.Data>
+                placeId = data[position].id ?: 0L
                 data.map {
                     it.isCheck = false
                 }
@@ -117,6 +150,39 @@ class ClubBookingActivity : BaseActivity<ActivityClubBookingBinding>() {
                 placeAdapter.setList(data)
 
                 btnBooking.visibility = VISIBLE
+            }
+
+            btnBooking.setOnClickListener {
+                viewModel.saveOrder(
+                    SaveOrderRequest(
+                        clubId = clubDetail.id ?: 0L,
+                        orderDate = orderDate,
+                        startSlot = startSlot,
+                        endSlot = endSlot,
+                        placeId = placeId,
+                    )
+                )
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 200) {
+            when (resultCode) {
+                RESULT_OK -> {
+                    val result =
+                        data?.getParcelableExtra<DropInResult>(DropInResult.EXTRA_DROP_IN_RESULT)
+
+                    viewModel.payPlay(result?.paymentMethodNonce?.nonce ?: "", orderId)
+                }
+                RESULT_CANCELED -> {
+                    Timber.d("已取消")
+                }
+                else -> {
+                    val error = data?.getSerializableExtra(DropInActivity.EXTRA_ERROR) as Exception
+                    error.printStackTrace()
+                }
             }
         }
     }

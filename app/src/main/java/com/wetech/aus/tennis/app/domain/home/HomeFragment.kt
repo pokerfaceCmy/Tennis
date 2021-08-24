@@ -98,6 +98,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
                         viewModel.likeClubLD.observe(mLifecycleOwner, {
                             recommendAdapter.setData(position, newData)
+                            viewModel.queryFavouritesClubList(ClubListRequest(
+                                pageNum = 1,
+                                enjoy = 1
+                            ))
                         })
                     }
                 }

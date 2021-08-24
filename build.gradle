@@ -5,17 +5,18 @@ buildscript {
         kotlin_version = "1.5.21"
         hilt_version = "2.37"
         google_services_version = "4.3.5"
-        android_gradle_plugin = "4.2.2"
+        android_gradle_plugin = '7.0.1'
         firebase = "2.7.1"
         firebase_plugin = "1.4.0"
     }
 
     repositories {
-        maven { url "https://maven.aliyun.com/repository/public" }
+        maven { url 'https://maven.aliyun.com/repository/central' }
         maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://jitpack.io' }
+        maven { url "https://jitpack.io" }
         mavenCentral()
         google()
+        jcenter()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$android_gradle_plugin"
@@ -32,14 +33,27 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url "https://maven.aliyun.com/repository/public" }
+        maven { url 'https://maven.aliyun.com/repository/central' }
         maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://jitpack.io' }
+        maven { url "https://jitpack.io" }
         mavenCentral()
         google()
-
+        jcenter()
     }
 }
+
+subprojects {
+    repositories {
+        maven {
+            url "https://cardinalcommerceprod.jfrog.io/artifactory/android"
+            credentials {
+                username 'braintree_team_sdk'
+                password 'AKCp8jQcoDy2hxSWhDAUQKXLDPDx6NYRkqrgFLRc3qDrayg6rrCbJpsKKyMwaykVL8FWusJpp'
+            }
+        }
+    }
+}
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir

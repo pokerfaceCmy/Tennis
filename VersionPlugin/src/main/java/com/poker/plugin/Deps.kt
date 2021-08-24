@@ -210,6 +210,10 @@ object Deps {
          */
         const val AAChartCore = "com.github.AAChartModel:AAChartCore-Kotlin:-SNAPSHOT"
 
+    }
 
+    object Braintree {
+        private const val version = ""
+        const val drop_in = "com.braintreepayments.api:drop-in:5.2.2"
     }
 }

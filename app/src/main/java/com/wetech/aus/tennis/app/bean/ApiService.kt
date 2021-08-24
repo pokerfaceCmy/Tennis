@@ -116,4 +116,15 @@ interface ApiService {
         @Query("clubId") clubId: Long,
     ): UsablePlaceByDayResponse?
 
+    @POST("/order/saveOrder")
+    suspend fun saveOrder(@Body saveOrderRequest: SaveOrderRequest):OrderResponse?
+
+    @GET("/pay/getToken")
+    suspend fun getToken(): PayTokenResponse?
+
+    @GET("/pay/payPlay")
+    suspend fun payPlay(
+        @Query("nonce") nonce: String,
+        @Query("orderId") orderId: Long,
+    ): PayPlayResponse?
 }

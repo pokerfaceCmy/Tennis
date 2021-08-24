@@ -2,6 +2,7 @@ package com.wetech.aus.tennis.app.domain.booking.repository
 
 import com.wetech.aus.tennis.app.bean.ApiService
 import com.wetech.aus.tennis.app.domain.booking.repository.bean.BookingRequest
+import com.wetech.aus.tennis.app.domain.booking.repository.bean.SaveOrderRequest
 import javax.inject.Inject
 
 /**
@@ -26,4 +27,11 @@ class BookingClient @Inject constructor(
         endSlot: String,
         clubId: Long
     ) = apiService.getUsablePlaceByDay(day, startSlot, endSlot, clubId)
+
+    suspend fun saveOrder(saveOrderRequest: SaveOrderRequest) = apiService.saveOrder(saveOrderRequest)
+
+    suspend fun getToken() = apiService.getToken()
+
+    suspend fun payPlay(nonce: String,
+                        orderId: Long,) = apiService.payPlay(nonce, orderId)
 }

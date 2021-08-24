@@ -21,6 +21,9 @@ class BookingViewModel @Inject constructor(
     val getDaysLD = MutableLiveData<DaysResponse?>()
     val getUsablePlaceTimeLD = MutableLiveData<UsablePlaceTimeResponse?>()
     val getUsablePlaceByDayLD = MutableLiveData<UsablePlaceByDayResponse?>()
+    val getTokenLD = MutableLiveData<PayTokenResponse?>()
+    val payPlayLD = MutableLiveData<PayPlayResponse?>()
+    val saveOrderLD = MutableLiveData<OrderResponse?>()
 
     fun queryBookingList(bookingRequest: BookingRequest) {
         enqueue({ bookingClient.queryBookingList(bookingRequest) }) {
@@ -55,6 +58,34 @@ class BookingViewModel @Inject constructor(
         enqueue({ bookingClient.getUsablePlaceByDay(day, startSlot, endSlot, clubId) }) {
             onSuccess {
                 getUsablePlaceByDayLD.value = it
+            }
+        }
+    }
+
+    fun saveOrder(saveOrderRequest: SaveOrderRequest) {
+        enqueue({ bookingClient.saveOrder(saveOrderRequest) }) {
+            onSuccess {
+                saveOrderLD.value = it
+            }
+        }
+    }
+
+
+    fun getToken() {
+        enqueue({ bookingClient.getToken() }) {
+            onSuccess {
+                getTokenLD.value = it
+            }
+        }
+    }
+
+    fun payPlay(
+        nonce: String,
+        orderId: Long,
+    ) {
+        enqueue({ bookingClient.payPlay(nonce, orderId) }) {
+            onSuccess {
+                payPlayLD.value = it
             }
         }
     }

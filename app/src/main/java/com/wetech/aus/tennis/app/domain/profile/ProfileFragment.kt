@@ -29,7 +29,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     imgAvatar.load(avatar)
                     tvUserName.text = userName
                     ratingBar.rating = starts?.toFloat() ?: 0f
-                    progressBar.progress = experienceValue ?: 0
+                    progressBar.progress = 50
                     tvGrowthValueContent.text = "再积174经验可升级>VIP2会员"
                 }
             }

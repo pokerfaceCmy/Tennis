@@ -7,10 +7,15 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import coil.load
 import com.google.android.gms.location.*
-import com.google.android.gms.maps.*
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.MapsInitializer
+import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.permissionx.guolindev.PermissionX
@@ -19,21 +24,24 @@ import com.wetech.aus.tennis.app.R
 import com.wetech.aus.tennis.app.databinding.FragmentMapsBinding
 import com.wetech.aus.tennis.app.domain.courts.vm.CourtsViewModel
 import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListRequest
+import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListResponse
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
+class MapsFragment : BaseFragment<FragmentMapsBinding>(), GoogleMap.OnMarkerClickListener,
+    OnMapReadyCallback {
     private val viewModel by getViewModel(CourtsViewModel::class.java) {
         queryMapClubListLD.observe(mLifecycleOwner, {
             it?.list?.forEach { data ->
                 val sydney = LatLng(data.latitude ?: 0.00, data.longitude ?: 0.00)
-                mMap.addMarker(
+                val marker = mMap.addMarker(
                     MarkerOptions()
                         .position(sydney)
                         .title("")
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_tennis))
                 )
+                marker.tag = data
             }
         })
     }
@@ -49,12 +57,9 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
 
     @SuppressLint("MissingPermission")
     override fun init() {
-        if (::mMap.isInitialized){
-            mMap.setOnMarkerClickListener { p0 ->
-                binding.cardView.visibility = View.VISIBLE
-                Timber.d(p0.position.toString())
-                true
-            }
+        binding.cardView.visibility = View.INVISIBLE
+        binding.cardView.setOnClickListener {
+            Timber.d("card")
         }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext)
@@ -67,12 +72,29 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
                             longitude = it.longitude.toString()
                         )
                     )
+
                     mMap.addMarker(
                         MarkerOptions().position(LatLng(it.latitude, it.longitude))
                     )
+
                 }
             }
+    }
 
+    override fun onMarkerClick(p0: Marker): Boolean {
+        binding.cardView.visibility = View.VISIBLE
+        binding.cardView.invalidate()
+        val data = p0.tag as ClubListResponse.Data
+        binding.apply {
+            img.load(data.cover)
+            tvName.text = data.name
+            tvBriefIntroduction.text = data.clubDesc
+            tvPhone.text = data.tel
+            tvDistance.text = data.distance.toString() + "m"
+            ivLike.load(if (data.enjoy == 1) R.drawable.ic_favorites_h else R.drawable.ic_favorites_n)
+        }
+
+        return true
     }
 
     override fun onCreateView(
@@ -81,8 +103,8 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
-        val rootView: View = inflater.inflate(R.layout.fragment_maps, container, false)
-        mMapView = rootView.findViewById<View>(R.id.mapView) as MapView
+//        val rootView: View = inflater.inflate(R.layout.fragment_maps, container, false)
+        mMapView = binding.root.findViewById<View>(R.id.mapView) as MapView
         mMapView.onCreate(savedInstanceState)
         mMapView.onResume()
         try {
@@ -91,13 +113,14 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
             e.printStackTrace()
         }
         mMapView.getMapAsync(this)
-        return rootView
+
+        return binding.root
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         Timber.d("onMapReady")
         mMap = googleMap
-
+        mMap.setOnMarkerClickListener(this)
     }
 
     override fun onResume() {

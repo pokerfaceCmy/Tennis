@@ -46,45 +46,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(),
         XPopup.Builder(this)
             .dismissOnTouchOutside(false)
             .dismissOnBackPressed(true)
-            .setPopupCallback(object : XPopupCallback {
-                override fun onCreated(popupView: BasePopupView?) {}
-
-                override fun beforeShow(popupView: BasePopupView?) {}
-
-                override fun onShow(popupView: BasePopupView?) {}
-
-                override fun onDismiss(popupView: BasePopupView?) {
-                    //如果已完成任务,正常销毁dialog
-                    if (this@BaseActivity::job.isInitialized) {
-                        if (job.isCompleted) {
-                            return
-                        } else {//取消任务,弹出提示
-                            job.cancel()
-                            showToast("已取消")
-                        }
-                    }
-                }
-
-                override fun beforeDismiss(popupView: BasePopupView?) {
-                }
-
-                override fun onBackPressed(popupView: BasePopupView?): Boolean {
-                    return false
-                }
-
-                override fun onKeyBoardStateChanged(popupView: BasePopupView?, height: Int) {}
-
-                override fun onDrag(
-                    popupView: BasePopupView?,
-                    value: Int,
-                    percent: Float,
-                    upOrLeft: Boolean
-                ) {
-                }
-
-            })
             .asCustom(SimpleLoadingDialog(this))
-
     }
 
     @Suppress("UNCHECKED_CAST")
