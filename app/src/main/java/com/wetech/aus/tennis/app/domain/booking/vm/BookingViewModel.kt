@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.poker.common.base.BaseViewModel
 import com.wetech.aus.tennis.app.domain.booking.repository.BookingClient
 import com.wetech.aus.tennis.app.domain.booking.repository.bean.*
+import com.wetech.aus.tennis.app.domain.club.FindVipResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -24,6 +25,8 @@ class BookingViewModel @Inject constructor(
     val getTokenLD = MutableLiveData<PayTokenResponse?>()
     val payPlayLD = MutableLiveData<PayPlayResponse?>()
     val saveOrderLD = MutableLiveData<OrderResponse?>()
+    val findVipLD = MutableLiveData<FindVipResponse?>()
+
 
     fun queryBookingList(bookingRequest: BookingRequest) {
         enqueue({ bookingClient.queryBookingList(bookingRequest) }) {
@@ -86,6 +89,15 @@ class BookingViewModel @Inject constructor(
         enqueue({ bookingClient.payPlay(nonce, orderId) }) {
             onSuccess {
                 payPlayLD.value = it
+            }
+        }
+    }
+
+
+    fun findVip(id: Long) {
+        enqueue({bookingClient.findVip(id)}){
+            onSuccess {
+                findVipLD.value = it
             }
         }
     }

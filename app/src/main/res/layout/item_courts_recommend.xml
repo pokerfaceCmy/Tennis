@@ -59,9 +59,13 @@
             android:clickable="false"
             android:insetTop="0dp"
             android:insetBottom="0dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingHorizontal="3dp"
             android:stateListAnimator="@null"
+            android:textAllCaps="false"
             android:textColor="#0E009E"
-            android:textSize="9sp"
+            android:textSize="8sp"
             app:cornerRadius="25dp"
             app:elevation="0dp"
             app:layout_constraintStart_toStartOf="@+id/tvPhone"
@@ -92,24 +96,26 @@
             tools:text="548m" />
 
         <com.google.android.material.button.MaterialButton
-            android:textSize="11sp"
             android:layout_width="70dp"
-            android:layout_height="wrap_content"
+            android:layout_height="19dp"
             android:backgroundTint="@color/white"
             android:drawableEnd="@drawable/ic_right"
-            android:gravity="center"
             android:insetTop="0dp"
             android:insetBottom="0dp"
+            android:minWidth="0dp"
             android:padding="0dp"
+            android:paddingStart="20dp"
             android:stateListAnimator="@null"
             android:text="@string/details"
             android:textAllCaps="false"
             android:textColor="#737373"
+            android:textSize="8sp"
             app:elevation="0dp"
+            app:iconPadding="0dp"
             app:layout_constraintBottom_toBottomOf="@+id/materialButton"
-            app:layout_constraintEnd_toEndOf="@+id/tvDistance"
+            app:layout_constraintEnd_toStartOf="@+id/img"
             app:layout_constraintTop_toTopOf="@+id/materialButton"
-            tools:ignore="SmallSp" />
+            tools:ignore="RtlSymmetry,SmallSp" />
 
         <com.wetech.aus.tennis.widget.TrapezoidImgView
             android:id="@+id/img"

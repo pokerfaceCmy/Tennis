@@ -8,6 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -22,6 +23,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     lateinit var userInfoDao: UserInfoDao
 
     override fun init() {
+
         binding.apply {
             lifecycleSupportedScope.launch(Dispatchers.Main) {
                 val userInfo = withContext(Dispatchers.IO) { userInfoDao.query() }
@@ -32,6 +34,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     progressBar.progress = 50
                     tvGrowthValueContent.text = "再积174经验可升级>VIP2会员"
                 }
+            }
+            imgAvatar.setOnClickListener {
+//                ARouter.getInstance()
+//                    .build("")
+//                    .navigation()
             }
         }
     }

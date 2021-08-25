@@ -9,10 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import coil.load
 import com.google.android.gms.location.*
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
-import com.google.android.gms.maps.MapsInitializer
-import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
@@ -164,14 +161,14 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), GoogleMap.OnMarkerClic
                     locationResult ?: return
                     for (location in locationResult.locations) {
                         Timber.d(location.toString())
-//                        mMap.moveCamera(
-//                            CameraUpdateFactory.newLatLngZoom(
-//                                LatLng(
-//                                    -37.8208,
-//                                    144.9641
-//                                ), 10F
-//                            )
-//                        )
+                        mMap.moveCamera(
+                            CameraUpdateFactory.newLatLngZoom(
+                                LatLng(
+                                    location.latitude,
+                                    location.longitude
+                                ), 10F
+                            )
+                        )
                     }
                 }
             },

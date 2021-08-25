@@ -1,12 +1,16 @@
 package com.wetech.aus.tennis.app.domain.club
 
 import android.content.Intent
+import android.os.Handler
+import android.os.SystemClock.sleep
 import android.view.View.VISIBLE
+import android.widget.ScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.blankj.utilcode.util.ToastUtils
 import com.braintreepayments.api.dropin.DropInActivity
 import com.braintreepayments.api.dropin.DropInRequest
 import com.braintreepayments.api.dropin.DropInResult
@@ -40,11 +44,16 @@ class ClubBookingActivity : BaseActivity<ActivityClubBookingBinding>() {
 
         getUsablePlaceByDayLD.observe(mLifecycleOwner, {
             placeAdapter.setList(it?.list)
+            Handler().post { binding.nestedScrollView.fullScroll(ScrollView.FOCUS_DOWN) }
         })
 
         saveOrderLD.observe(mLifecycleOwner, {
             orderId = it?.orderId ?: 0L
-            getToken()
+            if (isVip == "1") {
+                ToastUtils.showLong("预定成功")
+            } else {
+                getToken()
+            }
         })
 
         getTokenLD.observe(mLifecycleOwner, {
@@ -59,6 +68,9 @@ class ClubBookingActivity : BaseActivity<ActivityClubBookingBinding>() {
 
     @Autowired
     lateinit var clubDetail: ClubListResponse.Data
+
+    @Autowired
+    lateinit var isVip: String
 
     private var orderDate: String = ""
     private var startSlot: String = ""
@@ -150,6 +162,9 @@ class ClubBookingActivity : BaseActivity<ActivityClubBookingBinding>() {
                 placeAdapter.setList(data)
 
                 btnBooking.visibility = VISIBLE
+
+                Handler().post { binding.nestedScrollView.fullScroll(ScrollView.FOCUS_DOWN) }
+
             }
 
             btnBooking.setOnClickListener {

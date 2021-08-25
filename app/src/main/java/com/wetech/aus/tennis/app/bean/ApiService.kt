@@ -1,6 +1,7 @@
 package com.wetech.aus.tennis.app.bean
 
 import com.wetech.aus.tennis.app.domain.booking.repository.bean.*
+import com.wetech.aus.tennis.app.domain.club.FindVipResponse
 import com.wetech.aus.tennis.app.domain.home.repository.bean.BannerResponse
 import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListRequest
 import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListResponse
@@ -127,4 +128,9 @@ interface ApiService {
         @Query("nonce") nonce: String,
         @Query("orderId") orderId: Long,
     ): PayPlayResponse?
+
+    @GET("/club/findVipByClubId")
+    suspend fun findVip(
+        @Query("id") id: Long,
+    ): FindVipResponse?
 }

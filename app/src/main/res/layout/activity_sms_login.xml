@@ -78,6 +78,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editPhoneNum"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@null"

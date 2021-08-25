@@ -34,4 +34,6 @@ class BookingClient @Inject constructor(
 
     suspend fun payPlay(nonce: String,
                         orderId: Long,) = apiService.payPlay(nonce, orderId)
+
+    suspend fun findVip(id:Long) = apiService.findVip(id)
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import coil.load
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.google.android.material.button.MaterialButton
 import com.wetech.aus.tennis.app.R
 import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListResponse
 import com.wetech.aus.tennis.widget.TrapezoidImgView
@@ -20,8 +21,10 @@ class RecommendAdapter :
     override fun convert(holder: BaseViewHolder, item: ClubListResponse.Data) {
         holder.setText(R.id.tvName, item.name)
         holder.setText(R.id.tvBriefIntroduction, item.clubDesc)
-        holder.setText(R.id.tvPhone, item.tel)
+        holder.setText(R.id.tvPhone, "Tel:" + item.tel)
         holder.setText(R.id.tvDistance, item.distance.toString() + "m")
+        holder.getView<MaterialButton>(R.id.materialButton).text =
+            if (item.level == 2) "Nearest to me" else "Excellent environment"
 
         val img = holder.getView<TrapezoidImgView>(R.id.img)
         img.load(item.cover)
