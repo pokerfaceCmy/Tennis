@@ -26,7 +26,6 @@ class ClubDetailActivity : BaseActivity<ActivityClubDetailBinding>() {
             } else {
                 binding.clBooking.visibility = View.GONE
             }
-
         })
     }
 
@@ -87,7 +86,6 @@ class ClubDetailActivity : BaseActivity<ActivityClubDetailBinding>() {
 //                    .build("")
 //                    .navigation()
             }
-
         }
     }
 }

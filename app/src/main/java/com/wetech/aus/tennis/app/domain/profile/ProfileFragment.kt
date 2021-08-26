@@ -1,8 +1,10 @@
 package com.wetech.aus.tennis.app.domain.profile
 
 import coil.load
+import com.alibaba.android.arouter.launcher.ARouter
 import com.poker.common.base.BaseFragment
 import com.wetech.aus.tennis.app.databinding.FragmentProfileBinding
+import com.wetech.aus.tennis.app.domain.RoutePath
 import com.wetech.aus.tennis.app.domain.login.repository.bean.UserInfoDao
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -35,10 +37,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     tvGrowthValueContent.text = "再积174经验可升级>VIP2会员"
                 }
             }
-            imgAvatar.setOnClickListener {
-//                ARouter.getInstance()
-//                    .build("")
-//                    .navigation()
+
+            clEditProfile.setOnClickListener {
+                ARouter.getInstance()
+                    .build(RoutePath.Profile.EditProfileActivity)
+                    .navigation()
             }
         }
     }

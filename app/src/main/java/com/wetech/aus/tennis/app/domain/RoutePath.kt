@@ -24,7 +24,9 @@ object RoutePath {
 
     object Booking
 
-    object Profile
+    object Profile{
+        const val EditProfileActivity = "/profile/EditProfileActivity"
+    }
 
     object Club {
         const val ClubDetailActivity = "/club/ClubDetailActivity"

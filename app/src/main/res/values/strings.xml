@@ -45,4 +45,19 @@
     <string name="please_select_the_booking_time">Please select the booking time</string>
     <string name="choose_a_country">Choose a country</string>
     <string name="details">Details</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="billing_history">Billing History</string>
+    <string name="visit_history">Visit History</string>
+    <string name="policies_and_agreements">Policies and agreements</string>
+    <string name="change_password">Change Password</string>
+    <string name="logout">Logout</string>
+    <string name="profile_picture">Profile picture</string>
+    <string name="edit">Edit</string>
+    <string name="first_name">First Name*</string>
+    <string name="last_name">Last Name*</string>
+    <string name="email">Email*</string>
+    <string name="phone">phone*</string>
+    <string name="gender">Gender*</string>
+    <string name="date_of_birth_minimum_age_16">Date of birth(minimum age:16)*</string>
+    <string name="done">Done</string>
 </resources>
