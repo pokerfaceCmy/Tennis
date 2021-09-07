@@ -119,6 +119,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     .withObject(CLUB_DETAIL, adapter.data[position])
                     .navigation()
             }
+
+            cvSearch.setOnClickListener {
+                ARouter.getInstance()
+                    .build(RoutePath.SearchActivity)
+                    .navigation()
+            }
         }
     }
 

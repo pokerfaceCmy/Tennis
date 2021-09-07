@@ -19,7 +19,8 @@ data class ClubListRequest(
     val pageSize: Int? = null,
     val enjoy: Int? = null,
     val latitude: String? = null,
-    val longitude: String? = null
+    val longitude: String? = null,
+    val searchName: String? = null
 )
 
 data class ClubListResponse(

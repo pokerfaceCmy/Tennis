@@ -8,6 +8,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.leaf.library.StatusBarUtil
 import com.poker.common.base.BaseActivity
+import com.wetech.aus.tennis.app.R
 import com.wetech.aus.tennis.app.databinding.ActivityClubDetailBinding
 import com.wetech.aus.tennis.app.domain.RoutePath
 import com.wetech.aus.tennis.app.domain.booking.vm.BookingViewModel
@@ -27,6 +28,8 @@ class ClubDetailActivity : BaseActivity<ActivityClubDetailBinding>() {
                 binding.clBooking.visibility = View.GONE
             }
         })
+
+
     }
 
     companion object {
@@ -49,6 +52,17 @@ class ClubDetailActivity : BaseActivity<ActivityClubDetailBinding>() {
         StatusBarUtil.setTransparentForWindow(this)
         binding.apply {
             ivHead.load(clubDetail.cover)
+            ivLike.load(if (clubDetail.enjoy == 1) R.drawable.ic_favorites_h else R.drawable.ic_favorites_n)
+
+            ivLike.setOnClickListener {
+                var nowEnjoy = clubDetail.enjoy
+                viewModel.likeClub(clubDetail.id, if (clubDetail.enjoy == 1) "2" else "1")
+                viewModel.likeClubLD.observe(mLifecycleOwner, {
+                    nowEnjoy = if (nowEnjoy == 1) 2 else 1
+                    ivLike.load(if (nowEnjoy == 1) R.drawable.ic_favorites_h else R.drawable.ic_favorites_n)
+                })
+            }
+
             rvFacilities.layoutManager =
                 LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
             rvFacilities.adapter = facilitiesAdapter
@@ -70,14 +84,14 @@ class ClubDetailActivity : BaseActivity<ActivityClubDetailBinding>() {
                 ARouter.getInstance()
                     .build(RoutePath.Club.ClubBookingActivity)
                     .withObject(CLUB_DETAIL, clubDetail)
-                    .withString("isVip","1")
+                    .withString("isVip", "1")
                     .navigation()
             }
             clVisitorEnter.setOnClickListener {
                 ARouter.getInstance()
                     .build(RoutePath.Club.ClubBookingActivity)
                     .withObject(CLUB_DETAIL, clubDetail)
-                    .withString("isVip","0")
+                    .withString("isVip", "0")
                     .navigation()
             }
 

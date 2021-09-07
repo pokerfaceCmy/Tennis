@@ -1,5 +1,7 @@
 package com.wetech.aus.tennis.app.domain
 
+import com.wetech.aus.tennis.app.domain.search.SearchActivity
+
 /**
  * @Author: pokerfaceCmy
  * @Date: 2021/5/18 14:08
@@ -8,6 +10,7 @@ package com.wetech.aus.tennis.app.domain
  */
 object RoutePath {
     const val MainActivity = "/main/MainActivity"
+    const val SearchActivity = "/search/SearchActivity"
 
     object Login {
         const val SmsLoginActivity = "/login/SmsLoginActivity"
