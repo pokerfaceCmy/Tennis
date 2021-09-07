@@ -8,7 +8,7 @@
     <!-- 圆角图片 -->
     <style name="roundedCornerStyle_8dp">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">8dp</item>
+        <item name="cornerSize">7.5dp</item>
     </style>
 
 

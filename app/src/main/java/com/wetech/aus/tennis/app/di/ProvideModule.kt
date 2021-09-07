@@ -12,7 +12,6 @@ import com.wetech.aus.tennis.app.bean.DataWrapper
 import com.wetech.aus.tennis.app.di.ProjectConfig.BASE_URL
 import com.wetech.aus.tennis.app.di.ProjectConfig.BASE_URL_DEBUG
 import com.wetech.aus.tennis.app.di.ProjectConfig.DATABASE_NAME
-import com.wetech.aus.tennis.app.di.ProjectConfig.TIMEOUT
 import com.wetech.aus.tennis.app.domain.login.repository.bean.UserInfoDao
 import dagger.Module
 import dagger.Provides
@@ -35,7 +34,6 @@ import javax.inject.Singleton
 
 object ProjectConfig {
     //过期时间 单位秒
-    const val TIMEOUT = 30L
     const val BASE_URL_DEBUG = "http://159.138.93.235:8080"
     const val BASE_URL = "http://159.138.93.235:8080" // FIXME: 2021/7/30 等待正式Url地址给出后修改
     const val DATABASE_NAME = "Tennis.db"
@@ -63,9 +61,9 @@ object NetWorkModule {
         }
 
         val okHttpClient = OkHttpClient.Builder()
-            .readTimeout(TIMEOUT, TimeUnit.SECONDS)
-            .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
-            .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
+            .writeTimeout(10, TimeUnit.SECONDS)
+            .connectTimeout(10, TimeUnit.SECONDS)
             .addNetworkInterceptor(logInterceptor)
             .addInterceptor(tokenInterceptor)
             .retryOnConnectionFailure(true)

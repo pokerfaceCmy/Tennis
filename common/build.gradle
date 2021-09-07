@@ -111,5 +111,6 @@ dependencies {
     api Deps.Refresh.header
     //eventBus
     api Deps.Util.eventBus
-
+    api 'com.jakewharton.rxbinding4:rxbinding:4.0.0'
+    api 'com.jakewharton.rxbinding4:rxbinding-core:4.0.0'
 }

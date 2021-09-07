@@ -2,6 +2,7 @@ package com.wetech.aus.tennis.app.domain.login.repository.remote
 
 import com.wetech.aus.tennis.app.bean.ApiService
 import com.wetech.aus.tennis.app.domain.login.repository.bean.LoginRequest
+import com.wetech.aus.tennis.app.domain.login.repository.bean.UserInfo
 import javax.inject.Inject
 
 /**
@@ -20,4 +21,12 @@ class LoginClient @Inject constructor(
     suspend fun checkHasUser(phone: String, prefix: String) = apiService.checkHasUser(phone, prefix)
 
     suspend fun login(loginRequest: LoginRequest) = apiService.login(loginRequest)
+
+    suspend fun getOssTokenVO() = apiService.getOssTokenVO()
+
+    suspend fun updateUserInfo(userInfo: UserInfo?) = apiService.updateUserInfo(userInfo)
+
+    suspend fun getUserInfo() = apiService.getUserInfo()
+
+    suspend fun updateUserAvatar(avatar : String) = apiService.updateUserAvatar(avatar)
 }

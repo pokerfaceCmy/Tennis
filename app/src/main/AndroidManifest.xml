@@ -23,6 +23,9 @@
         tools:replace="android:appComponentFactory"
         tools:targetApi="p">
         <activity
+            android:name=".domain.search.SearchActivity"
+            android:exported="true" />
+        <activity
             android:name=".domain.profile.EditProfileActivity"
             android:exported="true" />
         <!--

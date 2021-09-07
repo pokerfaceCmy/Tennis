@@ -8,6 +8,8 @@ import com.wetech.aus.tennis.app.domain.home.repository.bean.ClubListResponse
 import com.wetech.aus.tennis.app.domain.login.repository.bean.LoginRequest
 import com.wetech.aus.tennis.app.domain.login.repository.bean.LoginResponse
 import com.wetech.aus.tennis.app.domain.login.repository.bean.PrefixResponse
+import com.wetech.aus.tennis.app.domain.login.repository.bean.UserInfo
+import com.wetech.aus.tennis.app.domain.profile.repository.OssTokenVOResp
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -53,6 +55,30 @@ interface ApiService {
      */
     @POST("/system/login")
     suspend fun login(@Body loginRequest: LoginRequest): LoginResponse?
+
+    /**
+     * 获取OssToken
+     */
+    @GET("/image/getOssTokenVO")
+    suspend fun getOssTokenVO(): OssTokenVOResp?
+
+    /**
+     * 修改用户信息
+     */
+    @POST("/user/updateUserInfo")
+    suspend fun updateUserInfo(@Body userInfo: UserInfo?):DataWrapper<*>
+
+    @GET("/user/getUserInfo")
+    suspend fun getUserInfo() : UserInfo
+
+
+    /**
+     * 用户修改头像
+     */
+    @GET("/user/updateUserAvatar")
+    suspend fun updateUserAvatar(
+        @Query("avatar") avatar: String
+    ): DataWrapper<*>
 
     /* --------------------------------- */
 
@@ -118,7 +144,7 @@ interface ApiService {
     ): UsablePlaceByDayResponse?
 
     @POST("/order/saveOrder")
-    suspend fun saveOrder(@Body saveOrderRequest: SaveOrderRequest):OrderResponse?
+    suspend fun saveOrder(@Body saveOrderRequest: SaveOrderRequest): OrderResponse?
 
     @GET("/pay/getToken")
     suspend fun getToken(): PayTokenResponse?

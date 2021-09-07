@@ -14,7 +14,7 @@
 
         <TextView
             android:id="@+id/tvName"
-            android:layout_width="90dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_marginTop="10dp"
@@ -23,6 +23,7 @@
             android:lines="1"
             android:textColor="#232323"
             android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/ivLike"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Tennis Club" />
@@ -61,7 +62,7 @@
             android:insetBottom="0dp"
             android:minWidth="0dp"
             android:minHeight="0dp"
-            android:paddingHorizontal="3dp"
+            android:paddingHorizontal="10dp"
             android:stateListAnimator="@null"
             android:textAllCaps="false"
             android:textColor="#0E009E"
@@ -83,7 +84,7 @@
             android:contentDescription="@string/image_data_null"
             android:src="@drawable/ic_favorites_n"
             app:layout_constraintBottom_toBottomOf="@+id/tvName"
-            app:layout_constraintStart_toEndOf="@+id/tvName"
+            app:layout_constraintEnd_toStartOf="@+id/img"
             app:layout_constraintTop_toTopOf="@+id/tvName" />
 
         <TextView
@@ -96,7 +97,7 @@
             tools:text="548m" />
 
         <com.google.android.material.button.MaterialButton
-            android:layout_width="70dp"
+            android:layout_width="wrap_content"
             android:layout_height="19dp"
             android:backgroundTint="@color/white"
             android:drawableEnd="@drawable/ic_right"
@@ -104,7 +105,6 @@
             android:insetBottom="0dp"
             android:minWidth="0dp"
             android:padding="0dp"
-            android:paddingStart="20dp"
             android:stateListAnimator="@null"
             android:text="@string/details"
             android:textAllCaps="false"

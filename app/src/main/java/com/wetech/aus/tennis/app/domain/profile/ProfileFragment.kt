@@ -10,7 +10,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -42,6 +41,22 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 ARouter.getInstance()
                     .build(RoutePath.Profile.EditProfileActivity)
                     .navigation()
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.apply {
+            lifecycleSupportedScope.launch(Dispatchers.Main) {
+                val userInfo = withContext(Dispatchers.IO) { userInfoDao.query() }
+                userInfo?.apply {
+                    imgAvatar.load(avatar)
+                    tvUserName.text = userName
+                    ratingBar.rating = starts?.toFloat() ?: 0f
+                    progressBar.progress = 50
+                    tvGrowthValueContent.text = "再积174经验可升级>VIP2会员"
+                }
             }
         }
     }

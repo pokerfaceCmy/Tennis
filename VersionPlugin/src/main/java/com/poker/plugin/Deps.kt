@@ -69,7 +69,7 @@ object Deps {
     }
 
     object AndroidX {
-        const val core = "androidx.core:core-ktx:1.5.0"
+        const val core = "androidx.core:core-ktx:1.6.0"
         const val appcompat = "androidx.appcompat:appcompat:1.3.0"
         const val constraintlayout = "androidx.constraintlayout:constraintlayout:2.0.4"
     }

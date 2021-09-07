@@ -60,4 +60,5 @@
     <string name="gender">Gender*</string>
     <string name="date_of_birth_minimum_age_16">Date of birth(minimum age:16)*</string>
     <string name="done">Done</string>
+    <string name="historys">Historys</string>
 </resources>

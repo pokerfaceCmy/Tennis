@@ -10,9 +10,9 @@
         android:layout_height="120dp"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="15dp"
-        app:cardCornerRadius="2dp"
-        app:cardElevation="10dp"
+        android:layout_marginBottom="7.5dp"
+        app:cardCornerRadius="7.5dp"
+        app:cardElevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/ivClub"
@@ -26,15 +26,63 @@
                 android:id="@+id/tvName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="125dp"
+                android:layout_marginStart="130dp"
                 android:layout_marginTop="23dp"
                 android:ellipsize="end"
                 android:lines="1"
+                android:textColor="#232323"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="XXXXX Tennis Club" />
+
+            <ImageView
+                android:layout_marginEnd="15dp"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="3dp"
+                android:background="#DDDDDD"
+                app:layout_constraintEnd_toEndOf="@+id/tvName"
+                app:layout_constraintStart_toStartOf="@+id/tvName"
+                app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+            <TextView
+                android:id="@+id/tvPlaceName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="#737373"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="@+id/tvName"
+                app:layout_constraintStart_toStartOf="@+id/tvName"
+                app:layout_constraintTop_toBottomOf="@+id/tvName"
+                tools:text="placeName" />
+
+            <TextView
+                android:ellipsize="end"
+                android:lines="1"
+                android:id="@+id/tvTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvPlaceName"
+                app:layout_constraintTop_toBottomOf="@+id/tvPlaceName"
+                tools:text="Time:2021-05-01 08:00-10：00" />
+
+            <TextView
+                android:id="@+id/tvOrderStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="11sp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvTime"
+                tools:text="待消费" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -42,8 +90,8 @@
         android:layout_width="130dp"
         android:layout_height="120dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:elevation="15dp"
+        android:layout_marginTop="7.5dp"
+        android:elevation="6dp"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
